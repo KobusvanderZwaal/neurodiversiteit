@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurodiversiteit op de werkvloer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1814;
+    --ink-light: #4A4640;
+    --ink-muted: #8A847C;
+    --rule: rgba(26,24,20,0.12);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
+
+  /* HEADER */
+  header { padding: 5rem 2rem 4rem; max-width: 960px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1.5rem; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem; }
+  h1 em { font-style: italic; color: var(--ink-light); }
+  .intro { font-size: 1.05rem; color: var(--ink-light); max-width: 640px; line-height: 1.75; }
+
+  /* ROLE BANNER */
+  .role-banner { display: flex; align-items: flex-start; gap: 14px; background: white; border: 1px solid var(--rule); border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 2rem; max-width: 640px; }
+  .role-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .role-text { font-size: 13px; color: var(--ink-light); line-height: 1.6; }
+  .role-text strong { font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+
+  /* STATS BAR */
+  .stats-bar { max-width: 960px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: white; }
+  .stat { padding: 1.5rem 1.75rem; border-right: 1px solid var(--rule); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--ink); display: block; line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+
+  /* FILTERS */
+  .filters-section { max-width: 960px; margin: 3.5rem auto 0; padding: 0 2rem; }
+  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1rem; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 16px; border-radius: 100px; border: 1px solid var(--rule); background: white; color: var(--ink-light); cursor: pointer; transition: all 0.2s; font-weight: 400; }
+  .filter-btn:hover, .filter-btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); font-weight: 500; }
+
+  /* GRID */
+  .grid-section { max-width: 960px; margin: 2rem auto 0; padding: 0 2rem 6rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+  /* CARD */
+  .card { background: white; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,24,20,0.08); }
+  .card.open { box-shadow: 0 4px 24px rgba(26,24,20,0.1); }
+  .card-top { padding: 1.25rem 1.25rem 1rem; display: flex; align-items: flex-start; gap: 12px; }
+  .card-num { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink-muted); opacity: 0.5; min-width: 24px; padding-top: 2px; }
+  .card-info { flex: 1; }
+  .cat-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; margin-bottom: 6px; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); line-height: 1.2; margin-bottom: 2px; }
+  .card-sub { font-size: 12px; color: var(--ink-muted); }
+  .chevron { color: var(--ink-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 4px; }
+  .card.open .chevron { transform: rotate(180deg); }
+
+  /* CARD BODY */
+  .card-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
+  .card.open .card-body { max-height: 1200px; }
+  .card-inner { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; margin-bottom: 1rem; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--cream); }
+  .tab-btn { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 7px 4px; border: none; background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em; }
+  .tab-btn.active { background: white; color: var(--ink); border-radius: 6px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .inner-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; margin-top: 12px; }
+  .inner-label:first-child { margin-top: 0; }
+  .beroep-list { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
+  .beroep-tag { font-size: 12px; padding: 3px 10px; border-radius: 6px; background: var(--cream); color: var(--ink-light); border: 1px solid var(--rule); }
+  .pro-list, .con-list { list-style: none; padding: 0; }
+  .pro-list li, .con-list li { font-size: 13px; line-height: 1.55; color: var(--ink-light); padding: 3px 0 3px 20px; position: relative; }
+  .pro-list li::before { content: '+'; position: absolute; left: 0; font-weight: 600; color: #4A7A57; }
+  .con-list li::before { content: '–'; position: absolute; left: 0; font-weight: 600; color: #A84444; }
+  .divider { height: 1px; background: var(--rule); margin: 12px 0; }
+
+  /* EMAIL MOCKUP */
+  .email-mockup { background: #FAFAF8; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; font-size: 13px; }
+  .email-header { padding: 12px 14px; border-bottom: 1px solid var(--rule); background: white; }
+  .email-meta-row { display: flex; gap: 6px; margin-bottom: 3px; font-size: 12px; color: var(--ink-muted); }
+  .email-meta-row strong { color: var(--ink-light); font-weight: 500; min-width: 28px; }
+  .email-subject { font-weight: 600; font-size: 13px; color: var(--ink); margin-top: 8px; }
+  .email-body { padding: 14px; line-height: 1.65; color: var(--ink-light); white-space: pre-wrap; }
+  .email-actions { padding: 10px 14px 14px; border-top: 1px solid var(--rule); }
+  .email-actions-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; }
+  .action-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: 12px; color: var(--ink-light); }
+  .action-item:last-child { border-bottom: none; }
+  .action-num { font-weight: 600; color: var(--ink-muted); min-width: 16px; }
+  .action-who { font-weight: 500; color: var(--ink); min-width: 70px; flex-shrink: 0; }
+  .action-what { flex: 1; }
+  .action-when { color: var(--ink-muted); white-space: nowrap; font-size: 11px; flex-shrink: 0; }
+
+  /* TRAINER NOTE */
+  .trainer-note { background: #FFFBF0; border: 1px solid rgba(200,169,110,0.3); border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-size: 12px; color: #7A5C1A; line-height: 1.55; }
+  .trainer-note strong { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; color: #C8A96E; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--rule); padding: 2rem; text-align: center; font-size: 12px; color: var(--ink-muted); max-width: 960px; margin: 0 auto; }
+  .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--ink-muted); font-style: italic; }
+
+  @media (max-width: 600px) {
+    header { padding: 3rem 1.25rem 2.5rem; }
+    .stats-bar { grid-template-columns: 1fr; margin: 2rem 1.25rem 0; }
+    .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+    .stat:last-child { border-bottom: none; }
+    .filters-section, .grid-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Training neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Referentiegids</p>
+  <h1>Neurodiversiteit<br><em>op de werkvloer</em></h1>
+  <p class="intro">De meeste mensen hebben neurodiverse kenmerken die hun werk beïnvloeden. Dit overzicht beschrijft de tien meest voorkomende vormen — met passende beroepen, voor- en nadelen, én een herkenbare casus uit de ontwerppraktijk.</p>
+
+  <div class="role-banner">
+    <div class="role-icon">🎓</div>
+    <div class="role-text">
+      <strong>Casus: vergaderverslag van een ontwerpoverleg</strong>
+      Bij elke kenmerk zie je hoe een medewerker na een ontwerpbespreking een mail schrijft met verslag en acties. De toon, structuur en inhoud van de mail weerspiegelen zowel de sterke als de lastige kanten van het neurodiverse kenmerk.
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">~20%</span>
+      <span class="stat-label">van werkenden heeft één of meer neurodiverse kenmerken</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">10</span>
+      <span class="stat-label">meest voorkomende kenmerken in zakelijke omgevingen</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5</span>
+      <span class="stat-label">categorieën: aandacht, sociaal, executief, sensorisch, leren</span>
+    </div>
+  </div>
+</header>
+
+<div class="filters-section">
+  <p class="section-heading">Filter op categorie</p>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-cat="all">Alle kenmerken</button>
+    <button class="filter-btn" data-cat="aandacht">Aandacht</button>
+    <button class="filter-btn" data-cat="sociaal">Sociaal</button>
+    <button class="filter-btn" data-cat="executief">Executief</button>
+    <button class="filter-btn" data-cat="sensorisch">Sensorisch</button>
+    <button class="filter-btn" data-cat="leren">Leren</button>
+  </div>
+</div>
+
+<div class="grid-section">
+  <div class="cards" id="cards"></div>
+</div>
+
+<footer>
+  Samengesteld als trainingsmateriaal neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Klik op een kaart voor details en casus
+</footer>
+
+<script>
+const catMeta = {
+  aandacht:  { label: 'Aandacht & energie',     bg: '#FBF4E8', text: '#7A5C1A' },
+  sociaal:   { label: 'Sociaal & cognitief',    bg: '#EDF4EF', text: '#2D6040' },
+  executief: { label: 'Executief functioneren', bg: '#EEF1F5', text: '#3A5070' },
+  sensorisch:{ label: 'Sensorisch & emotioneel',bg: '#FAF0F0', text: '#7A2E2F' },
+  leren:     { label: 'Leren & verwerken',      bg: '#F3EFF8', text: '#5A3E80' },
+};
+
+const data = [
+  {
+    id: 1, naam: 'ADHD', sub: 'Attention Deficit Hyperactivity Disorder', cat: 'aandacht',
+    beroepen: ['Ondernemer', 'Designer', 'Sales', 'Crisishulpverlening', 'Journalist'],
+    voordelen: ['Hoge energie en drive, sterk in korte sprints', 'Creatief en associatief denken', 'Snel schakelen en improviseren', 'Uitblinkend in crisismanagement'],
+    nadelen: ['Moeite met langdurige, repetitieve focus', 'Uitstellen van routinetaken', 'Vergeetachtigheid en ongeorganiseerdheid', 'Impulsieve beslissingen onder druk'],
+    mail: {
+      van: 'Sander de Bruin <s.debruin@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 18:42',
+      subject: 'Verslag overleg – trouwens nog iets over de gevels!!',
+      body: `Hey allemaal,
+
+Goed overleg vandaag! Ik heb even snel de highlights op een rijtje gezet — oh wacht, voordat ik het vergeet: Karin had een geweldig idee over de gevelkleur dat écht werkt voor het project, dat moeten we sowieso meenemen.
+
+Oke, het verslag: we hebben de plattegronden besproken, er waren wat opmerkingen over de routing op de begane grond maar ik weet niet meer precies wat er besloten was — iemand aantekeningen gemaakt? De deadline voor de voorlopige tekeningen is volgende week, of was het de week erna?
+
+Ik had nog een briljant idee tijdens de meeting over de entreehal maar dat ben ik nu even kwijt — komt me vast nog te binnen. Laat me weten als ik iets gemist heb!`,
+      acties: [
+        { wie: 'Sander', wat: 'Idee gevelkleur van Karin uitwerken (superleuk!)', wanneer: 'Vrijdag?' },
+        { wie: '???', wat: 'Uitzoeken wat de exacte beslissing was over de routing', wanneer: 'Asap' },
+        { wie: 'Iedereen', wat: 'Deadline tekeningen bevestigen — volgende week of de week erna', wanneer: '—' },
+      ],
+      trainersnoot: 'Let op: de enthousiaste openingszin en het briljante idee over de gevel zijn typische ADHD-kracht — energiek, associatief, creatief. De nadelen zijn ook duidelijk zichtbaar: de beslissing over de routing is vergeten, de deadline is onduidelijk, en een actie heeft geen eigenaar. De volgorde van de acties volgt de gedachtegang van de schrijver, niet de prioriteit voor het team.'
+    }
+  },
+  {
+    id: 2, naam: 'Autisme (ASS)', sub: 'Autismespectrumstoornis', cat: 'sociaal',
+    beroepen: ['IT & softwareontwikkeling', 'Wetenschappelijk onderzoek', 'Data-analyse', 'Kwaliteitscontrole', 'Actuariaat'],
+    voordelen: ['Uitzonderlijke diepgang en detailgerichtheid', 'Consistent, betrouwbaar en voorspelbaar', 'Hoog kennisspecialisme in één domein', 'Sterk in logica en systeemdenken'],
+    nadelen: ['Moeite met impliciete sociale communicatie', 'Overgevoeligheid voor omgevingsprikkels', 'Onverwachte veranderingen veroorzaken stress', 'Aanpassen aan sociale codes kost energie'],
+    mail: {
+      van: 'Thomas Verhoeven <t.verhoeven@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp; Opdrachtgever J. Bakker',
+      datum: 'Do 5 jun 2025, 17:03',
+      subject: 'Vergaderverslag ontwerpoverleg 05-06-2025 — definitief',
+      body: `Geachte aanwezigen,
+
+Hierbij het verslag van het ontwerpoverleg gehouden op donderdag 5 juni 2025, aanvang 14:00 uur, locatie vergaderruimte B (tweede verdieping), aanwezig: T. Verhoeven, K. Smits, J. Bakker (opdrachtgever), M. de Vries.
+
+Besproken: (1) routing begane grond: besloten dat de looproute langs de noordgevel 1,2 m breed wordt conform NEN 2559 §4.3; (2) gevelmaterialen: keramische geveltegels RAL 7016 conform eerder vastgesteld kleurenpalet; (3) opleveringsschema: geen wijzigingen t.o.v. versie 3.2 d.d. 28 mei 2025.
+
+Afwijkingen t.o.v. de agenda: agendapunt 4 (installaties) is niet behandeld wegens tijdgebrek; dit punt wordt verschoven naar het volgende overleg, waarvoor een nieuwe uitnodiging volgt. Gelieve dit verslag binnen 5 werkdagen te bevestigen of wijzigingen door te geven.`,
+      acties: [
+        { wie: 'T. Verhoeven', wat: 'Routetekening aanpassen conform besluit (breedte 1,2 m, NEN 2559 §4.3)', wanneer: '12-06-2025' },
+        { wie: 'K. Smits', wat: 'Bestelbevestiging geveltegels RAL 7016 aanleveren aan opdrachtgever', wanneer: '10-06-2025' },
+        { wie: 'T. Verhoeven', wat: 'Nieuw overleg inplannen voor agendapunt 4 (installaties)', wanneer: '09-06-2025' },
+      ],
+      trainersnoot: 'De mail is volledig, nauwkeurig en traceerbaar — typische ASS-kracht. Normverwijzingen, exacte datums, aanwezigenlijst: alles klopt. Het nadeel: de toon is formeel tot op het onpersoonlijke af ("Geachte aanwezigen"), er is geen ruimte voor context of nuance, en de opdrachtgever staat zonder verdere toelichting in de CC. Iemand die de vergadering niet bijwoonde, mist de onderlinge sfeer volledig.'
+    }
+  },
+  {
+    id: 3, naam: 'Dyslexie', sub: 'Lees- en schrijfstoornis', cat: 'leren',
+    beroepen: ['Architect', 'Ondernemer', 'Design & kunst', 'Chirurg', 'Ingenieur'],
+    voordelen: ['Sterk ruimtelijk en visueel denken', 'Creatief probleemoplossen', 'Groot geheel snel overzien', 'Lateraal denkvermogen boven gemiddeld'],
+    nadelen: ['Traag lezen en schrijven in tekst-intensief werk', 'Spelfouten in formele communicatie', 'Moeite met uitgebreide schriftelijke rapportage', 'Onzekerheid in tekstzware omgevingen'],
+    mail: {
+      van: 'Laura Prins <l.prins@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 19:15',
+      subject: 'Verlag vergadering ontwerpoverlg',
+      body: `Hai team,
+
+Het overleg was goed. We heben de plattegronden besproken en de routing op de begaande grond is aangepast — de doorloop wordt breder zodat het vloeit. Ik heb een scets gemakt tijdens de meeting die de ruimteworking goed laat zien, die stuur ik morgenochtend rond als bijlage.
+
+De gevels zijn ook langs gekoment. Karin had een goed idee over kleuraccenten bij de entree, dat geeft het gebouw echt karakter. Ik stel voor dat we dat visueel uitwerken voor de volgende presesentatie — ik zie het al helemaal voor me.`,
+      acties: [
+        { wie: 'Laura', wat: 'Schets routeaanpassing rondsturen', wanneer: 'Vrijdagochtend' },
+        { wie: 'Karin', wat: 'Kleurvoorstel entree uitwerken voor presentatie', wanneer: 'Voor volgend overleg' },
+        { wie: 'Martijn', wat: 'Deadline voorlopige tekeningen bevestigen', wanneer: 'Deze week' },
+      ],
+      trainersnoot: 'De inhoud is helder en toont sterk ruimtelijk inzicht ("zodat het vloeit", "ruimtewerking"). De schrijver ziet het geheel snel en heeft al een schets gemaakt — dat is dyslexie-kracht. De nadelen zijn goed zichtbaar: "Verlag", "overlg", "begaande", "scets", "gemakt", "presesentatie" — typische spelfouten die niet door gewone autocorrectie worden opgevangen. De acties zijn bondig maar logisch geordend.'
+    }
+  },
+  {
+    id: 4, naam: 'Hoogsensitiviteit', sub: 'Highly Sensitive Person (HSP)', cat: 'sensorisch',
+    beroepen: ['HR & coaching', 'Gezondheidszorg', 'Kunst & muziek', 'Counseling', 'Klantenservice'],
+    voordelen: ['Sterke empathie en fijne mensenkennis', 'Nuanceert communicatie subtiel en effectief', 'Vroeg signaleren van spanningen in teams', 'Hoge kwaliteitsstandaard in eigen werk'],
+    nadelen: ['Snel overprikkeld in drukke omgevingen', 'Moeite met conflicten en directe kritiek', 'Emotionele belasting leidt tot vermoeidheid', 'Grenzen stellen gaat niet vanzelf'],
+    mail: {
+      van: 'Nina Hartman <n.hartman@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 20:30',
+      subject: 'Verslag overleg vandaag — even napraten?',
+      body: `Hoi iedereen,
+
+Dank voor het prettige overleg — ik vond het fijn dat we de tijd namen voor elkaars inbreng. Ik heb gemerkt dat er even wat spanning was rond het onderwerp van de planning, en ik wil ervoor zorgen dat iedereen zich gehoord voelt — dus als iemand daar nog over wil praten, dan hoor ik dat graag.
+
+Inhoudelijk: we hebben besloten de routing op de begane grond aan te passen (bredere doorloop), en Karin's idee over kleuraccenten bij de entree wordt meegenomen in de volgende presentatie. Ik wil ook even zeggen dat ik het fijn vind hoe betrokken iedereen is — dat maakt dit soort projecten echt de moeite waard.`,
+      acties: [
+        { wie: 'Martijn', wat: 'Routetekening aanpassen (even overleggen wat jij hiervoor nodig hebt?)', wanneer: 'Volgende week' },
+        { wie: 'Karin', wat: 'Kleurvoorstel uitwerken — laat me weten als je sparring partner wilt', wanneer: 'Voor de presentatie' },
+        { wie: 'Nina', wat: 'Even contact opnemen met Jan (opdrachtgever) — ik maakte me een beetje zorgen over zijn reactie', wanneer: 'Morgen' },
+      ],
+      trainersnoot: 'De mail toont HSP-kracht: warme toon, aandacht voor groepsdynamiek, signalering van spanning. De inhoudelijke besluiten zijn correct. Het nadeel is subtiel maar herkenbaar: de mail is meer gericht op de relatie dan op de taak, de actie voor Nina zelf gaat over het managen van een gevoel van de opdrachtgever, en er wordt geen duidelijke deadline of eigenaar benoemd voor de routing. De bezorgdheid over Jan\'s reactie is onvermeld gebleven tijdens de vergadering zelf.'
+    }
+  },
+  {
+    id: 5, naam: 'Dyscalculie', sub: 'Rekenstoornis', cat: 'leren',
+    beroepen: ['Communicatie & PR', 'Kunst & creatieve sector', 'Pedagogiek', 'Taal & journalistiek'],
+    voordelen: ['Alternatieve strategieën voor probleemoplossing', 'Sterk verbaal en narratief denkvermogen', 'Creatieve benadering van vraagstukken', 'Compenserend sterk in kwalitatieve analyse'],
+    nadelen: ['Fouten in financiële berekeningen en budgetten', 'Moeite met tijdsinschatting en plannen', 'Onzekerheid bij data-presentaties', 'Vermijding van getalsmatige taken'],
+    mail: {
+      van: 'Bas Meijer <b.meijer@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 18:55',
+      subject: 'Verslag overleg — inhoudelijk goed, maar even checken op cijfers',
+      body: `Hoi allemaal,
+
+Mooi overleg! De gesprekken over routing en materiaalgebruik waren inhoudelijk sterk — ik heb goed kunnen bijdragen aan de discussie over de ruimtebeleving van de entreehal.
+
+Er kwamen ook wat getallen langs: iemand noemde een breedte van 1,2 of misschien 1,4 meter voor de looproute, en de kosteninschatting voor de geveltegels lag ergens tussen de €40.000 en €60.000 (ik meen €48.000 maar check dit even). Deadline voor de tekeningen is over een week of twee, drie — ik ben niet zeker van de exacte datum, dat moet iemand even terugzoeken in de notulen.`,
+      acties: [
+        { wie: 'Martijn', wat: 'Exacte breedte looproute bevestigen (1,2 of 1,4 m?)', wanneer: 'Zo snel mogelijk' },
+        { wie: 'Karin', wat: 'Kosteninschatting geveltegels verifiëren — Bas dacht €48.000 maar onzeker', wanneer: 'Deze week' },
+        { wie: 'Iemand', wat: 'Exacte deadline tekeningen terugzoeken', wanneer: '?' },
+      ],
+      trainersnoot: 'De kwalitatieve bijdrage is helder en zelfverzekerd — dyscalculie-kracht in verbaal redeneren. De nadelen zijn zichtbaar in de actielijst: getallen worden herhaald met twijfel ("1,2 of misschien 1,4", "€48.000 maar check dit"), de deadline is vaag ("week of twee, drie"), en een actie heeft geen eigenaar ("Iemand"). Dit zijn geen vergissingen maar een patroon: kwantitatieve informatie wordt vermeden of als onzeker gemarkeerd.'
+    }
+  },
+  {
+    id: 6, naam: 'Dyspraxie (DCD)', sub: 'Ontwikkelingscoördinatiestoornis', cat: 'executief',
+    beroepen: ['IT & programmering', 'Schrijven & journalistiek', 'Adviseur & consultant', 'Wetenschappelijk onderzoek'],
+    voordelen: ['Uitstekend verbaal en analytisch denkvermogen', 'Creatief en out-of-the-box', 'Groot doorzettingsvermogen', 'Empathisch door eigen ervaringskennis'],
+    nadelen: ['Moeite met motorische taken als schrijven en typen', 'Traag in routinehandelingen', 'Organisatie van ruimte en tijd is lastig', 'Uitputting bij meervoudige taken tegelijk'],
+    mail: {
+      van: 'Joris van Dijk <j.vandijk@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 21:45',
+      subject: 'Verslag overleg — laat maar uitgebreid',
+      body: `Hoi team,
+
+Sorry voor de late mail — het tikken gaat me niet zo makkelijk af en ik moest even bijkomen van de dag. Het overleg was inhoudelijk goed: we hebben besloten de looproute te verbreden naar 1,2 meter, de geveltegels in kleur RAL 7016 te bevestigen, en het idee van Karin over kleuraccenten bij de entree wordt meegenomen.
+
+Ik heb alles goed onthouden want ik luister altijd heel goed — aantekeningen maken en tegelijk meedenken is voor mij lastig. Volgende keer zou het helpen als iemand de acties live invult op het scherm, dan kan ik me puur focussen op de inhoud.`,
+      acties: [
+        { wie: 'Martijn', wat: 'Routetekening aanpassen naar 1,2 m breedte', wanneer: 'Volgende week' },
+        { wie: 'Karin', wat: 'Kleuraccenten entree uitwerken', wanneer: 'Voor de presentatie' },
+        { wie: 'Joris', wat: 'Bestelling geveltegels RAL 7016 bevestigen bij leverancier', wanneer: 'Vrijdag (als het lukt)' },
+      ],
+      trainersnoot: 'De mail is inhoudelijk correct en analytisch sterk — goede herinnering zonder aantekeningen. Dat is dyspraxie-kracht. De nadelen zijn subtiel aanwezig: de mail is laat verstuurd, de schrijver excuseert zich voor het tikken, en de eigen actie eindigt met "als het lukt" — een onbewuste anticipatie op motorische en organisatorische drempel. De suggestie voor een live actielijst toont zelfinzicht maar ook kwetsbaarheid.'
+    }
+  },
+  {
+    id: 7, naam: 'Executieve disfunctie', sub: 'Zwakke plannings- en regulatiefuncties', cat: 'executief',
+    beroepen: ['Creatieve beroepen', 'Zelfstandig ondernemer', 'Wetenschappelijk onderzoek', 'Adviseur'],
+    voordelen: ['Sterk in open, creatieve en vrije taken', 'Flexibel bij ongestructureerde problemen', 'Energie-uitbarstingen bij passend werk', 'Onconventioneel probleemoplossen'],
+    nadelen: ['Moeite met deadlines en prioriteiten stellen', 'Taken beginnen of afronden kost buitensporig veel energie', 'Overzicht bewaren bij complexe projecten', 'Afhankelijkheid van externe structuur en reminders'],
+    mail: {
+      van: 'Floor Smeets <f.smeets@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Vr 6 jun 2025, 11:20',
+      subject: 'Oh ja — verslag van gisteren',
+      body: `Hoi,
+
+Ik had dit gisteren al willen sturen maar het lukte niet. Ik weet ook niet precies waar ik moet beginnen dus ik schrijf gewoon wat ik me herinner: er was iets over de routing, en over de gevels, en Karin had een idee. Ik geloof dat er deadlines zijn afgesproken maar ik heb ze niet opgeschreven.
+
+Ik ga dit uitzoeken maar ik weet niet wanneer ik er aan toekom — mijn agenda is een chaos. Als iemand zijn eigen aantekeningen heeft, kunnen we die dan samenvoegen? Dan maak ik er wat van.`,
+      acties: [
+        { wie: 'Iedereen', wat: 'Stuur je eigen aantekeningen naar Floor', wanneer: 'Wanneer je kan' },
+        { wie: 'Floor', wat: 'Definitief verslag maken op basis van aantekeningen team', wanneer: 'Nog te bepalen' },
+        { wie: 'Floor', wat: 'Deadline tekeningen terugzoeken in e-mail van vorige week', wanneer: 'Ergens deze week' },
+      ],
+      trainersnoot: 'De zin "ik weet ook niet precies waar ik moet beginnen" is het hart van executieve disfunctie: het starten zelf is het probleem, niet de motivatie of het kunnen. De kracht is het zelfbewustzijn en de pragmatische oplossing (samenvoegen). De nadelen zijn zichtbaar in alle drie de acties: geen eigenaar, geen datum, delegatie van de taak die juist aan de schrijver was toegewezen. De mail is één dag te laat.'
+    }
+  },
+  {
+    id: 8, naam: 'Tourette & tics', sub: 'Motorische of vocale ticstoornissen', cat: 'sensorisch',
+    beroepen: ['Muziek & performance', 'Technologie & programmering', 'Academisch onderzoek', 'Zelfstandige beroepen'],
+    voordelen: ['Hoge creativiteit en associatief denkvermogen', 'Doorzettingsvermogen door dagelijkse uitdagingen', 'Sterk aanpassingsvermogen opgebouwd', 'Humor en goed relativeringsvermogen'],
+    nadelen: ['Sociale spanning door onvrijwillige tics in vergaderingen', 'Concentratieproblemen door het onderdrukken van tics', 'Vermoeidheid door constante zelfcontrole', 'Risico op stigma of onbegrip op de werkvloer'],
+    mail: {
+      van: 'Ruben Taks <r.taks@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 17:55',
+      subject: 'Verslag overleg — en sorry als ik vandaag wat drukker was dan anders',
+      body: `Hey team,
+
+Even het verslag van vandaag. Goede meeting — ik heb niet alles meegekregen want ik was op een gegeven moment wat afgeleid, maar inhoudelijk waren de besluiten helder: looproute wordt 1,2 m, gevels RAL 7016, en Karin's kleuridee gaat mee in de volgende presentatie.
+
+Ik wil er even bij zeggen: als mijn tikken of bewegen vandaag opviel en afleiding gaf, mijn excuses daarvoor — dat heeft niks met het overleg te maken. Ik weet dat het soms ongemakkelijk is. Voor de volgende keer: een kortere vergadering of een korte pauze helpt me echt. Maar goed — de acties zijn duidelijk.`,
+      acties: [
+        { wie: 'Martijn', wat: 'Routing aanpassen, tekening delen voor feedback', wanneer: 'Dinsdag' },
+        { wie: 'Karin', wat: 'Kleurvoorstel entree uitwerken', wanneer: 'Voor de presentatie' },
+        { wie: 'Ruben', wat: 'Vergadering installaties inplannen (gemist agendapunt)', wanneer: 'Vrijdag' },
+      ],
+      trainersnoot: 'De acties zijn compact en compleet — Tourette gaat zelden gepaard met verminderd inhoudelijk vermogen. De kracht is zichtbaar: doorzettingsvermogen, zelfinzicht, en humor ("dat heeft niks met het overleg te maken"). Het nadeel is pijnlijk eerlijk: de excuus-zin toont hoe veel mentale energie gaat naar zelfmanagement in sociale settings. De aanbeveling voor een kortere vergadering is een reële en legitieme aanpassing die zelden wordt gevraagd.'
+    }
+  },
+  {
+    id: 9, naam: 'Hoog intelligentie', sub: 'Tweede-orde denken & overexcitabiliteit', cat: 'sociaal',
+    beroepen: ['Wetenschap & R&D', 'Strategie & consultancy', 'Recht', 'Technologie', 'Filosofie & ethiek'],
+    voordelen: ['Snel leren en diepgaand analyseren', 'Verbanden leggen over disciplines heen', 'Sterke intrinsieke motivatie', 'Hoge normen en kwaliteitsdrift'],
+    nadelen: ['Verveling en afhaken bij routinewerk', 'Moeite met gelijkdenken in teams', 'Perfectionisme als blokkade voor actie', 'Sociale isolatie door kenniskloof'],
+    mail: {
+      van: 'Eva Lensen <e.lensen@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 18:10',
+      subject: 'Verslag + kanttekening bij het besluit over de routing',
+      body: `Hoi allen,
+
+Verslag: looproute begane grond wordt 1,2 m conform NEN 2559, gevels RAL 7016 bevestigd, kleuridee Karin wordt uitgewerkt voor de presentatie. Dat zijn de besluiten.
+
+Ik wil wel een kanttekening plaatsen bij het besluit over de routing: 1,2 m is de minimummaat, maar gegeven de verwachte bezettingsgraad (piekmoment ~80 personen bij de entree op basis van het programma van eisen) en de brandveiligheidsnorm, zou 1,5 m logischer zijn. Ik had dit ingebracht maar het leek alsof het niet goed landde — wellicht was de toelichting te snel. Ik stuur apart een onderbouwing rond. Voor de rest was het een prima overleg, al had agendapunt 4 ook prima kunnen vervallen want dat had iedereen al kunnen lezen in de notitie van vorige week.`,
+      acties: [
+        { wie: 'Eva', wat: 'Onderbouwing alternatieve breedte looproute (1,5 m) rondsturen', wanneer: 'Morgenochtend' },
+        { wie: 'Martijn', wat: 'Routetekening on hold — wachten op Eva\'s notitie eerst', wanneer: 'Na ontvangst notitie' },
+        { wie: 'Team', wat: 'Agendapunt 4 installaties: lezen notitie v. vorige week volstaat, overleg overslaan?', wanneer: '—' },
+      ],
+      trainersnoot: 'De analyse is raak en goed onderbouwd — dit is hoog-intelligentie-kracht op zijn best. Het nadeel is ook direct zichtbaar: Eva stelt een actie on hold die al was toegewezen aan een collega, en suggereert impliciet dat een vergaderpunt overgeslagen kan worden. De zin "het leek alsof het niet goed landde" verraadt sociale frustratie. De mail is inhoudelijk superieur maar heeft de potentie om irritatie te wekken bij collega\'s die het gevoel krijgen dat hun besluit ter discussie wordt gesteld.'
+    }
+  },
+  {
+    id: 10, naam: 'Sociale angst', sub: 'Angststoornis in sociale & professionele context', cat: 'sociaal',
+    beroepen: ['Schrijven & onderzoek', 'IT & remote werk', 'Boekhouding & administratie', 'Archief & documentatie'],
+    voordelen: ['Grondig en uiterst zorgvuldig in werk', 'Sterk voorbereidingsvermogen', 'Empathie voor drempelervaring van anderen', 'Introverte kracht: diepgang en reflectie'],
+    nadelen: ['Presentaties en vergaderingen kosten buitensporig veel energie', 'Vermijding van conflicten of het geven van feedback', 'Netwerken en zichtbaarheid zijn moeilijk', 'Overanalyse leidt tot besluiteloosheid'],
+    mail: {
+      van: 'Mark Visser <m.visser@ontwerpbureau.nl>',
+      aan: 'Team Ontwerp',
+      datum: 'Do 5 jun 2025, 22:05',
+      subject: 'Verslag overleg (hopelijk volledig — laat me weten als ik iets mis)',
+      body: `Hoi allemaal,
+
+Hierbij het verslag van vandaag, al twijfel ik of ik alles goed heb begrepen — voel je vrij om te corrigeren. Besloten: looproute 1,2 m breedte, gevels RAL 7016, kleurvoorstel Karin meenemen in volgende presentatie.
+
+Ik wilde tijdens de meeting nog iets zeggen over de brandveiligheidsmaat bij de routing, maar het moment was weg voordat ik er in kon. Misschien is het ook niet zo belangrijk — jullie weten dat beter dan ik. Ik hoop dat het verslag bruikbaar is.`,
+      acties: [
+        { wie: 'Martijn', wat: 'Routetekening aanpassen (1,2 m) — toch even checken of dit ook brandveilig is?', wanneer: 'Volgende week' },
+        { wie: 'Karin', wat: 'Kleurvoorstel uitwerken', wanneer: 'Voor de presentatie' },
+        { wie: 'Mark', wat: 'Notitie brandveiligheidsmaat routing opstellen… als dat nuttig is', wanneer: 'Geen deadline' },
+      ],
+      trainersnoot: 'De mail is inhoudelijk correct en zorgvuldig opgesteld — sociale angst-kracht in schriftelijke communicatie. De nadelen zijn subtiel maar herkenbaar: de opening relativeert het eigen werk ("hopelijk volledig"), een relevant inhoudelijk punt (brandveiligheid) wordt als "misschien niet zo belangrijk" weggezet, en de eigen actie eindigt met "als dat nuttig is" en geen deadline. Het punt over brandveiligheid was wél relevant — het verdween omdat de drempel om het hardop te zeggen te hoog was.'
+    }
+  }
+];
+
+let activeFilter = 'all';
+let openId = null;
+let activeTab = {};
+
+function renderMail(d) {
+  const m = d.mail;
+  return `
+    <div class="email-mockup">
+      <div class="email-header">
+        <div class="email-meta-row"><strong>Van</strong> ${m.van}</div>
+        <div class="email-meta-row"><strong>Aan</strong> ${m.aan}</div>
+        <div class="email-meta-row"><strong>Datum</strong> ${m.datum}</div>
+        <div class="email-subject">${m.subject}</div>
+      </div>
+      <div class="email-body">${m.body}</div>
+      <div class="email-actions">
+        <div class="email-actions-label">Actiepunten</div>
+        ${m.acties.map((a,i) => `
+          <div class="action-item">
+            <span class="action-num">${i+1}.</span>
+            <span class="action-who">${a.wie}</span>
+            <span class="action-what">${a.wat}</span>
+            <span class="action-when">${a.wanneer}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="trainer-note"><strong>Trainerstoelichting</strong>${m.trainersnoot}</div>`;
+}
+
+function render() {
+  const container = document.getElementById('cards');
+  const filtered = activeFilter === 'all' ? data : data.filter(d => d.cat === activeFilter);
+  if (!filtered.length) { container.innerHTML = '<div class="empty">Geen kenmerken in deze categorie.</div>'; return; }
+
+  container.innerHTML = filtered.map(d => {
+    const meta = catMeta[d.cat];
+    const isOpen = openId === d.id;
+    const tab = activeTab[d.id] || 'info';
+    return `
+    <div class="card${isOpen ? ' open' : ''}" data-id="${d.id}" role="button" aria-expanded="${isOpen}" tabindex="0">
+      <div class="card-top">
+        <span class="card-num">${String(d.id).padStart(2,'0')}</span>
+        <div class="card-info">
+          <span class="cat-badge" style="background:${meta.bg}; color:${meta.text}">${meta.label}</span>
+          <div class="card-title">${d.naam}</div>
+          <div class="card-sub">${d.sub}</div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-inner">
+          <div class="tabs">
+            <button class="tab-btn${tab==='info'?' active':''}" data-id="${d.id}" data-tab="info">Profiel</button>
+            <button class="tab-btn${tab==='mail'?' active':''}" data-id="${d.id}" data-tab="mail">Casus: mail</button>
+          </div>
+          <div class="tab-panel${tab==='info'?' active':''}">
+            <div class="inner-label">Passende beroepen</div>
+            <div class="beroep-list">${d.beroepen.map(b => `<span class="beroep-tag">${b}</span>`).join('')}</div>
+            <div class="divider"></div>
+            <div class="inner-label">Voordelen</div>
+            <ul class="pro-list">${d.voordelen.map(v => `<li>${v}</li>`).join('')}</ul>
+            <div class="divider"></div>
+            <div class="inner-label">Aandachtspunten</div>
+            <ul class="con-list">${d.nadelen.map(n => `<li>${n}</li>`).join('')}</ul>
+          </div>
+          <div class="tab-panel${tab==='mail'?' active':''}">
+            ${renderMail(d)}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  container.querySelectorAll('.card').forEach(el => {
+    el.addEventListener('click', e => {
+      if (e.target.closest('.tab-btn')) return;
+      const id = parseInt(el.dataset.id);
+      openId = openId === id ? null : id;
+      render();
+    });
+    el.addEventListener('keydown', e => {
+      if (e.target.closest('.tab-btn')) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const id = parseInt(el.dataset.id); openId = openId === id ? null : id; render(); }
+    });
+  });
+
+  container.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      activeTab[id] = btn.dataset.tab;
+      openId = id;
+      render();
+    });
+  });
+}
+
+document.getElementById('filters').querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.cat;
+    openId = null;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
