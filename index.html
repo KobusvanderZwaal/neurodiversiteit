@@ -4,135 +4,180 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neurodiversiteit op de werkvloer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --cream: #F5F0E8;
-    --ink: #1A1814;
-    --ink-light: #4A4640;
-    --ink-muted: #8A847C;
-    --rule: rgba(26,24,20,0.12);
+    --blue: #0076C0;
+    --blue-dark: #005A96;
+    --blue-light: #E8F3FB;
+    --bg: #EDEBE6;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-muted: #888888;
+    --rule: #D8D6D0;
+    --rule-light: #E8E6E0;
   }
   html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
 
-  /* HEADER */
-  header { padding: 5rem 2rem 4rem; max-width: 960px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
-  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1.5rem; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem; }
-  h1 em { font-style: italic; color: var(--ink-light); }
-  .intro { font-size: 1.05rem; color: var(--ink-light); max-width: 640px; line-height: 1.75; }
+  /* TOPBAR */
+  .topbar { background: var(--blue); padding: 0 2rem; }
+  .topbar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 38px; }
+  .topbar-left { font-size: 12px; font-weight: 700; color: var(--white); letter-spacing: 0.01em; }
+  .topbar-right { display: flex; gap: 1.5rem; }
+  .topbar-right a { font-size: 12px; font-weight: 500; color: var(--white); text-decoration: underline; }
+
+  /* NAVBAR */
+  .navbar { background: var(--white); border-bottom: 1px solid var(--rule); padding: 0 2rem; }
+  .navbar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .navbar-logo { display: flex; flex-direction: column; line-height: 1; }
+  .navbar-logo-text { font-size: 32px; font-weight: 800; color: var(--blue); letter-spacing: -0.04em; font-style: italic; }
+  .navbar-logo-sub { font-size: 9px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; }
+  .navbar-links { display: flex; gap: 2rem; }
+  .navbar-links a { font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; }
+  .navbar-links a:hover { color: var(--blue); }
+
+  /* HEADER / HERO */
+  header { background: var(--bg); padding: 3.5rem 2rem 3rem; border-bottom: 1px solid var(--rule); }
+  .header-inner { max-width: 1100px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 1rem; }
+  h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.05; color: var(--text); margin-bottom: 1.5rem; letter-spacing: -0.03em; }
+  .intro { font-size: 1.1rem; color: var(--blue); max-width: 640px; line-height: 1.7; font-weight: 700; }
 
   /* ROLE BANNER */
-  .role-banner { display: flex; align-items: flex-start; gap: 14px; background: white; border: 1px solid var(--rule); border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 2rem; max-width: 640px; }
-  .role-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-  .role-text { font-size: 13px; color: var(--ink-light); line-height: 1.6; }
-  .role-text strong { font-weight: 600; color: var(--ink); display: block; margin-bottom: 2px; }
+  .role-banner { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; margin-top: 2rem; max-width: 640px; }
+  .role-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .role-text { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+  .role-text strong { font-weight: 600; color: var(--text); display: block; margin-bottom: 3px; }
 
   /* STATS BAR */
-  .stats-bar { max-width: 960px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: white; }
-  .stat { padding: 1.5rem 1.75rem; border-right: 1px solid var(--rule); }
+  .stats-bar { background: var(--white); border-bottom: 1px solid var(--rule); }
+  .stats-bar-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .stat { padding: 1.5rem 2rem; border-right: 1px solid var(--rule); }
   .stat:last-child { border-right: none; }
-  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--ink); display: block; line-height: 1; margin-bottom: 4px; }
-  .stat-label { font-size: 12px; color: var(--ink-muted); line-height: 1.4; }
+  .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--blue); display: block; line-height: 1; margin-bottom: 5px; letter-spacing: -0.03em; }
+  .stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
   /* FILTERS */
-  .filters-section { max-width: 960px; margin: 3.5rem auto 0; padding: 0 2rem; }
-  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1rem; }
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
-  .filter-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 16px; border-radius: 100px; border: 1px solid var(--rule); background: white; color: var(--ink-light); cursor: pointer; transition: all 0.2s; font-weight: 400; }
-  .filter-btn:hover, .filter-btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); font-weight: 500; }
+  .filters-section { max-width: 1100px; margin: 2.5rem auto 0; padding: 0 2rem; }
+  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 0; border: 1px solid var(--rule); background: var(--white); color: var(--text-mid); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .filter-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
 
   /* GRID */
-  .grid-section { max-width: 960px; margin: 2rem auto 0; padding: 0 2rem 6rem; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .grid-section { max-width: 1100px; margin: 1.5rem auto 0; padding: 0 2rem 6rem; }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
 
   /* CARD */
-  .card { background: white; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,24,20,0.08); }
-  .card.open { box-shadow: 0 4px 24px rgba(26,24,20,0.1); }
-  .card-top { padding: 1.25rem 1.25rem 1rem; display: flex; align-items: flex-start; gap: 12px; }
-  .card-num { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink-muted); opacity: 0.5; min-width: 24px; padding-top: 2px; }
+  .card { background: var(--white); overflow: hidden; cursor: pointer; transition: background 0.15s; }
+  .card:hover { background: #FAFAFA; }
+  .card.open { background: var(--white); }
+  .card-top { padding: 1.5rem; display: flex; align-items: flex-start; gap: 14px; }
+  .card-num { font-size: 11px; font-weight: 600; color: var(--text-muted); min-width: 22px; padding-top: 3px; }
   .card-info { flex: 1; }
-  .cat-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; margin-bottom: 6px; }
-  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); line-height: 1.2; margin-bottom: 2px; }
-  .card-sub { font-size: 12px; color: var(--ink-muted); }
-  .chevron { color: var(--ink-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 4px; }
-  .card.open .chevron { transform: rotate(180deg); }
+  .cat-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; margin-bottom: 7px; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--blue); line-height: 1.2; margin-bottom: 3px; }
+  .card-sub { font-size: 12px; color: var(--text-muted); }
+  .chevron { color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 4px; }
+  .card.open .chevron { transform: rotate(180deg); color: var(--blue); }
 
   /* CARD BODY */
   .card-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
   .card.open .card-body { max-height: 1200px; }
-  .card-inner { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+  .card-inner { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--rule-light); padding-top: 1.25rem; }
 
   /* TABS */
-  .tabs { display: flex; gap: 0; margin-bottom: 1rem; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--cream); }
-  .tab-btn { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 7px 4px; border: none; background: transparent; color: var(--ink-muted); cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em; }
-  .tab-btn.active { background: white; color: var(--ink); border-radius: 6px; }
+  .tabs { display: flex; margin-bottom: 1.25rem; border-bottom: 2px solid var(--rule-light); }
+  .tab-btn { flex: 1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 8px 4px; border: none; background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+  .tab-btn:hover:not(.active) { color: var(--text); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  .inner-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; margin-top: 12px; }
+  .inner-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; margin-top: 14px; }
   .inner-label:first-child { margin-top: 0; }
   .beroep-list { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
-  .beroep-tag { font-size: 12px; padding: 3px 10px; border-radius: 6px; background: var(--cream); color: var(--ink-light); border: 1px solid var(--rule); }
+  .beroep-tag { font-size: 12px; padding: 3px 10px; background: var(--blue-light); color: var(--blue-dark); border: none; font-weight: 500; }
   .pro-list, .con-list { list-style: none; padding: 0; }
-  .pro-list li, .con-list li { font-size: 13px; line-height: 1.55; color: var(--ink-light); padding: 3px 0 3px 20px; position: relative; }
-  .pro-list li::before { content: '+'; position: absolute; left: 0; font-weight: 600; color: #4A7A57; }
-  .con-list li::before { content: '–'; position: absolute; left: 0; font-weight: 600; color: #A84444; }
-  .divider { height: 1px; background: var(--rule); margin: 12px 0; }
+  .pro-list li, .con-list li { font-size: 13px; line-height: 1.55; color: var(--text-mid); padding: 3px 0 3px 20px; position: relative; }
+  .pro-list li::before { content: '+'; position: absolute; left: 0; font-weight: 700; color: #1E7A45; }
+  .con-list li::before { content: '–'; position: absolute; left: 0; font-weight: 700; color: #B03A2E; }
+  .divider { height: 1px; background: var(--rule-light); margin: 12px 0; }
 
   /* EMAIL MOCKUP */
-  .email-mockup { background: #FAFAF8; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; font-size: 13px; }
-  .email-header { padding: 12px 14px; border-bottom: 1px solid var(--rule); background: white; }
-  .email-meta-row { display: flex; gap: 6px; margin-bottom: 3px; font-size: 12px; color: var(--ink-muted); }
-  .email-meta-row strong { color: var(--ink-light); font-weight: 500; min-width: 28px; }
-  .email-subject { font-weight: 600; font-size: 13px; color: var(--ink); margin-top: 8px; }
-  .email-body { padding: 14px; line-height: 1.65; color: var(--ink-light); white-space: pre-wrap; }
+  .email-mockup { background: var(--bg); border: 1px solid var(--rule); overflow: hidden; font-size: 13px; }
+  .email-header { padding: 12px 14px; border-bottom: 1px solid var(--rule); background: var(--white); }
+  .email-meta-row { display: flex; gap: 6px; margin-bottom: 3px; font-size: 12px; color: var(--text-muted); }
+  .email-meta-row strong { color: var(--text-mid); font-weight: 500; min-width: 28px; }
+  .email-subject { font-weight: 700; font-size: 13px; color: var(--text); margin-top: 8px; }
+  .email-body { padding: 14px; line-height: 1.65; color: var(--text-mid); white-space: pre-wrap; }
   .email-actions { padding: 10px 14px 14px; border-top: 1px solid var(--rule); }
-  .email-actions-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; }
-  .action-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: 12px; color: var(--ink-light); }
+  .email-actions-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .action-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule-light); font-size: 12px; color: var(--text-mid); }
   .action-item:last-child { border-bottom: none; }
-  .action-num { font-weight: 600; color: var(--ink-muted); min-width: 16px; }
-  .action-who { font-weight: 500; color: var(--ink); min-width: 70px; flex-shrink: 0; }
+  .action-num { font-weight: 700; color: var(--blue); min-width: 16px; }
+  .action-who { font-weight: 700; color: var(--text); min-width: 70px; flex-shrink: 0; }
   .action-what { flex: 1; }
-  .action-when { color: var(--ink-muted); white-space: nowrap; font-size: 11px; flex-shrink: 0; }
+  .action-when { color: var(--text-muted); white-space: nowrap; font-size: 11px; flex-shrink: 0; }
 
   /* TRAINER NOTE */
-  .trainer-note { background: #FFFBF0; border: 1px solid rgba(200,169,110,0.3); border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-size: 12px; color: #7A5C1A; line-height: 1.55; }
-  .trainer-note strong { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; color: #C8A96E; }
+  .trainer-note { background: var(--blue-light); border-left: 3px solid var(--blue); padding: 10px 14px; margin-top: 10px; font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .trainer-note strong { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; color: var(--blue); }
+
+  /* BASELINE SECTION */
+  .baseline-section { max-width: 1100px; margin: 2.5rem auto 0; padding: 0 2rem; }
+  .baseline-header { display: flex; align-items: center; gap: 16px; margin-bottom: 0.75rem; }
+  .baseline-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .baseline-title { font-size: 1.15rem; font-weight: 700; color: var(--blue); }
+  .baseline-intro { font-size: 13px; color: var(--text-mid); line-height: 1.65; max-width: 680px; margin-bottom: 1rem; }
+  .baseline-toggle { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 9px 20px; border: none; background: var(--blue); color: var(--white); cursor: pointer; transition: background 0.15s; margin-bottom: 1.25rem; display: inline-flex; align-items: center; gap: 7px; }
+  .baseline-toggle:hover { background: var(--blue-dark); }
+  .baseline-toggle .bl-chevron { transition: transform 0.25s; }
+  .baseline-toggle.open .bl-chevron { transform: rotate(180deg); }
+  .baseline-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
+  .baseline-body.open { max-height: 1400px; }
 
   /* FOOTER */
-  footer { border-top: 1px solid var(--rule); padding: 2rem; text-align: center; font-size: 12px; color: var(--ink-muted); max-width: 960px; margin: 0 auto; }
-  .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--ink-muted); font-style: italic; }
+  footer { background: var(--blue); padding: 2rem; text-align: center; font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 0; }
+  footer strong { color: var(--white); font-weight: 700; }
+  .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-muted); font-style: italic; background: var(--white); }
 
-  @media (max-width: 600px) {
-    header { padding: 3rem 1.25rem 2.5rem; }
-    .stats-bar { grid-template-columns: 1fr; margin: 2rem 1.25rem 0; }
+  @media (max-width: 700px) {
+    .navbar-links, .topbar-right { display: none; }
+    header { padding: 2rem 1.25rem; }
+    .stats-bar-inner { grid-template-columns: 1fr; }
     .stat { border-right: none; border-bottom: 1px solid var(--rule); }
     .stat:last-child { border-bottom: none; }
-    .filters-section, .grid-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .filters-section, .grid-section, .baseline-section { padding-left: 1.25rem; padding-right: 1.25rem; }
     .cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <p class="eyebrow">Training neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Referentiegids</p>
-  <h1>Neurodiversiteit<br><em>op de werkvloer</em></h1>
-  <p class="intro">De meeste mensen hebben neurodiverse kenmerken die hun werk beïnvloeden. Dit overzicht beschrijft de tien meest voorkomende vormen — met passende beroepen, voor- en nadelen, én een herkenbare casus uit de ontwerppraktijk.</p>
 
-  <div class="role-banner">
-    <div class="role-icon">🎓</div>
-    <div class="role-text">
-      <strong>Casus: vergaderverslag van een ontwerpoverleg</strong>
-      Bij elke kenmerk zie je hoe een medewerker na een ontwerpbespreking een mail schrijft met verslag en acties. De toon, structuur en inhoud van de mail weerspiegelen zowel de sterke als de lastige kanten van het neurodiverse kenmerk.
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">Informatie neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Referentiegids</p>
+    <h1>Neurodiversiteit op de werkvloer</h1>
+    <p class="intro">De meeste mensen hebben neurodiverse kenmerken die hun werk beïnvloeden. Dit overzicht beschrijft de tien meest voorkomende vormen — met passende beroepen, voor- en nadelen, én een herkenbare casus uit de ontwerppraktijk.</p>
+
+    <div class="role-banner">
+      <div class="role-icon">🎓</div>
+      <div class="role-text">
+        <strong>Casus: vergaderverslag van een ontwerpoverleg</strong>
+        Bij elke kenmerk zie je hoe een medewerker na een ontwerpbespreking een mail schrijft met verslag en acties. De toon, structuur en inhoud van de mail weerspiegelen zowel de sterke als de lastige kanten van het neurodiverse kenmerk.
+      </div>
     </div>
   </div>
+</header>
 
-  <div class="stats-bar">
+<div class="stats-bar">
+  <div class="stats-bar-inner">
     <div class="stat">
       <span class="stat-num">~20%</span>
       <span class="stat-label">van werkenden heeft één of meer neurodiverse kenmerken</span>
@@ -146,7 +191,7 @@
       <span class="stat-label">categorieën: aandacht, sociaal, executief, sensorisch, leren</span>
     </div>
   </div>
-</header>
+</div>
 
 <div class="filters-section">
   <p class="section-heading">Filter op categorie</p>
@@ -160,12 +205,67 @@
   </div>
 </div>
 
+<div class="baseline-section">
+  <div class="baseline-header">
+    <span class="baseline-label">Referentie</span>
+    <span class="baseline-title">De neutrale basismail</span>
+  </div>
+  <p class="baseline-intro">Hieronder zie je hoe een vergaderverslag eruitziet zonder uitgesproken neurodiverse kenmerken: volledig, zakelijk, helder gestructureerd en neutraal van toon. Dit is de maatstaf waartegen de tien varianten op de kaarten hieronder kunnen worden vergeleken.</p>
+  <button class="baseline-toggle" id="baselineToggle">
+    <span>Toon basismail</span>
+    <svg class="bl-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="baseline-body" id="baselineBody">
+    <div class="email-mockup" style="max-width:680px; margin-bottom:1.5rem;">
+      <div class="email-header">
+        <div class="email-meta-row"><strong>Van</strong> Projectteam Ontwerp &lt;team@ontwerpbureau.nl&gt;</div>
+        <div class="email-meta-row"><strong>Aan</strong> Team Ontwerp; J. Bakker (opdrachtgever)</div>
+        <div class="email-meta-row"><strong>Datum</strong> Do 5 jun 2025, 17:30</div>
+        <div class="email-subject">Vergaderverslag ontwerpoverleg 05-06-2025</div>
+      </div>
+      <div class="email-body">Hoi allemaal,
+
+Hierbij het verslag van het ontwerpoverleg van donderdag 5 juni 2025 (14:00–15:30, vergaderruimte B). Aanwezig: S. de Bruin, T. Verhoeven, L. Prins, N. Hartman, K. Smits, J. Bakker (opdrachtgever).
+
+Besproken en besloten:
+1. Routing begane grond — de looproute langs de noordgevel wordt 1,2 m breed (conform NEN 2559 §4.3). Martijn past de tekening aan.
+2. Gevelmaterialen — keramische geveltegels in kleur RAL 7016 zijn bevestigd conform het vastgestelde kleurenpalet.
+3. Kleuraccenten entree — het voorstel van Karin om kleuraccenten toe te voegen bij de entree wordt uitgewerkt en meegenomen in de volgende presentatie.
+
+Niet behandeld: agendapunt 4 (installaties) is wegens tijdgebrek verschoven naar het volgende overleg.
+
+Vragen of aanvullingen? Reageer voor vrijdag 13 juni.</div>
+      <div class="email-actions">
+        <div class="email-actions-label">Actiepunten</div>
+        <div class="action-item">
+          <span class="action-num">1.</span>
+          <span class="action-who">Martijn</span>
+          <span class="action-what">Routetekening aanpassen (breedte 1,2 m, NEN 2559 §4.3)</span>
+          <span class="action-when">12-06-2025</span>
+        </div>
+        <div class="action-item">
+          <span class="action-num">2.</span>
+          <span class="action-who">Karin</span>
+          <span class="action-what">Kleurvoorstel entree uitwerken voor de volgende presentatie</span>
+          <span class="action-when">Voor volgend overleg</span>
+        </div>
+        <div class="action-item">
+          <span class="action-num">3.</span>
+          <span class="action-who">Projectteam</span>
+          <span class="action-what">Nieuw overleg inplannen voor agendapunt 4 (installaties)</span>
+          <span class="action-when">09-06-2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grid-section">
   <div class="cards" id="cards"></div>
 </div>
 
 <footer>
-  Samengesteld als trainingsmateriaal neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Klik op een kaart voor details en casus
+  <strong>abt</strong> &nbsp;·&nbsp; Informatie neurodiversiteit &amp; inclusie &nbsp;·&nbsp; Klik op een kaart voor details en casus
 </footer>
 
 <script>
@@ -522,6 +622,14 @@ document.getElementById('filters').querySelectorAll('.filter-btn').forEach(btn =
 });
 
 render();
+
+const baselineToggle = document.getElementById('baselineToggle');
+const baselineBody = document.getElementById('baselineBody');
+baselineToggle.addEventListener('click', () => {
+  const isOpen = baselineBody.classList.toggle('open');
+  baselineToggle.classList.toggle('open', isOpen);
+  baselineToggle.querySelector('span').textContent = isOpen ? 'Verberg basismail' : 'Toon basismail';
+});
 </script>
 </body>
 </html>
