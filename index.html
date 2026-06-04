@@ -70,12 +70,12 @@
 
   /* GRID */
   .grid-section { max-width: 1100px; margin: 1.5rem auto 0; padding: 0 2rem 6rem; }
-  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
 
   /* CARD */
   .card { background: var(--white); overflow: hidden; cursor: pointer; transition: background 0.15s; }
   .card:hover { background: #FAFAFA; }
-  .card.open { background: var(--white); }
+  .card.open { background: var(--blue-light); }
   .card-top { padding: 1.5rem; display: flex; align-items: flex-start; gap: 14px; }
   .card-num { font-size: 11px; font-weight: 600; color: var(--text-muted); min-width: 22px; padding-top: 3px; }
   .card-info { flex: 1; }
@@ -85,10 +85,20 @@
   .chevron { color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 4px; }
   .card.open .chevron { transform: rotate(180deg); color: var(--blue); }
 
-  /* CARD BODY */
-  .card-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
-  .card.open .card-body { max-height: 1200px; }
-  .card-inner { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--rule-light); padding-top: 1.25rem; }
+  /* CARD DETAIL (full-width expand) */
+  .card-detail { grid-column: 1 / -1; background: var(--white); overflow: hidden; animation: detailIn 0.35s cubic-bezier(0.4,0,0.2,1); }
+  @keyframes detailIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .detail-inner { padding: 1.75rem 1.5rem; border-top: 2px solid var(--blue); }
+  .detail-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .detail-head .cat-badge { margin-bottom: 0; }
+  .detail-title { font-size: 1.3rem; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
+  .detail-sub { font-size: 12px; color: var(--text-muted); }
+  .profiel-cols { display: grid; grid-template-columns: 1fr; gap: 0.25rem 2.5rem; }
+  .casus-cols { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
+  .casus-cols .trainer-note { margin-top: 0; }
+  @media (min-width: 701px) {
+    .profiel-cols { grid-template-columns: 1fr 1fr; }
+  }
 
   /* TABS */
   .tabs { display: flex; margin-bottom: 1.25rem; border-bottom: 2px solid var(--rule-light); }
@@ -145,6 +155,10 @@
   footer { background: var(--blue); padding: 2rem; text-align: center; font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 0; }
   footer strong { color: var(--white); font-weight: 700; }
   .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-muted); font-style: italic; background: var(--white); }
+
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
 
   @media (max-width: 700px) {
     .navbar-links, .topbar-right { display: none; }
@@ -521,38 +535,33 @@ let activeTab = {};
 function renderMail(d) {
   const m = d.mail;
   return `
-    <div class="email-mockup">
-      <div class="email-header">
-        <div class="email-meta-row"><strong>Van</strong> ${m.van}</div>
-        <div class="email-meta-row"><strong>Aan</strong> ${m.aan}</div>
-        <div class="email-meta-row"><strong>Datum</strong> ${m.datum}</div>
-        <div class="email-subject">${m.subject}</div>
+    <div class="casus-cols">
+      <div class="email-mockup">
+        <div class="email-header">
+          <div class="email-meta-row"><strong>Van</strong> ${m.van}</div>
+          <div class="email-meta-row"><strong>Aan</strong> ${m.aan}</div>
+          <div class="email-meta-row"><strong>Datum</strong> ${m.datum}</div>
+          <div class="email-subject">${m.subject}</div>
+        </div>
+        <div class="email-body">${m.body}</div>
+        <div class="email-actions">
+          <div class="email-actions-label">Actiepunten</div>
+          ${m.acties.map((a,i) => `
+            <div class="action-item">
+              <span class="action-num">${i+1}.</span>
+              <span class="action-who">${a.wie}</span>
+              <span class="action-what">${a.wat}</span>
+              <span class="action-when">${a.wanneer}</span>
+            </div>`).join('')}
+        </div>
       </div>
-      <div class="email-body">${m.body}</div>
-      <div class="email-actions">
-        <div class="email-actions-label">Actiepunten</div>
-        ${m.acties.map((a,i) => `
-          <div class="action-item">
-            <span class="action-num">${i+1}.</span>
-            <span class="action-who">${a.wie}</span>
-            <span class="action-what">${a.wat}</span>
-            <span class="action-when">${a.wanneer}</span>
-          </div>`).join('')}
-      </div>
-    </div>
-    <div class="trainer-note"><strong>Trainerstoelichting</strong>${m.trainersnoot}</div>`;
+      <div class="trainer-note"><strong>Toelichting</strong>${m.trainersnoot}</div>
+    </div>`;
 }
 
-function render() {
-  const container = document.getElementById('cards');
-  const filtered = activeFilter === 'all' ? data : data.filter(d => d.cat === activeFilter);
-  if (!filtered.length) { container.innerHTML = '<div class="empty">Geen kenmerken in deze categorie.</div>'; return; }
-
-  container.innerHTML = filtered.map(d => {
-    const meta = catMeta[d.cat];
-    const isOpen = openId === d.id;
-    const tab = activeTab[d.id] || 'info';
-    return `
+function renderTile(d, isOpen) {
+  const meta = catMeta[d.cat];
+  return `
     <div class="card${isOpen ? ' open' : ''}" data-id="${d.id}" role="button" aria-expanded="${isOpen}" tabindex="0">
       <div class="card-top">
         <span class="card-num">${String(d.id).padStart(2,'0')}</span>
@@ -563,40 +572,67 @@ function render() {
         </div>
         <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="card-body">
-        <div class="card-inner">
-          <div class="tabs">
-            <button class="tab-btn${tab==='info'?' active':''}" data-id="${d.id}" data-tab="info">Profiel</button>
-            <button class="tab-btn${tab==='mail'?' active':''}" data-id="${d.id}" data-tab="mail">Casus: mail</button>
+    </div>`;
+}
+
+function renderDetail(d) {
+  const meta = catMeta[d.cat];
+  const tab = activeTab[d.id] || 'info';
+  return `
+    <div class="card-detail">
+      <div class="detail-inner">
+        <div class="detail-head">
+          <span class="cat-badge" style="background:${meta.bg}; color:${meta.text}">${meta.label}</span>
+          <span class="detail-title">${d.naam}</span>
+          <span class="detail-sub">${d.sub}</span>
+        </div>
+        <div class="tabs">
+          <button class="tab-btn${tab==='info'?' active':''}" data-id="${d.id}" data-tab="info">Profiel</button>
+          <button class="tab-btn${tab==='mail'?' active':''}" data-id="${d.id}" data-tab="mail">Casus: mail</button>
+        </div>
+        <div class="tab-panel${tab==='info'?' active':''}">
+          <div class="inner-label">Passende beroepen</div>
+          <div class="beroep-list">${d.beroepen.map(b => `<span class="beroep-tag">${b}</span>`).join('')}</div>
+          <div class="divider"></div>
+          <div class="profiel-cols">
+            <div>
+              <div class="inner-label">Voordelen</div>
+              <ul class="pro-list">${d.voordelen.map(v => `<li>${v}</li>`).join('')}</ul>
+            </div>
+            <div>
+              <div class="inner-label">Aandachtspunten</div>
+              <ul class="con-list">${d.nadelen.map(n => `<li>${n}</li>`).join('')}</ul>
+            </div>
           </div>
-          <div class="tab-panel${tab==='info'?' active':''}">
-            <div class="inner-label">Passende beroepen</div>
-            <div class="beroep-list">${d.beroepen.map(b => `<span class="beroep-tag">${b}</span>`).join('')}</div>
-            <div class="divider"></div>
-            <div class="inner-label">Voordelen</div>
-            <ul class="pro-list">${d.voordelen.map(v => `<li>${v}</li>`).join('')}</ul>
-            <div class="divider"></div>
-            <div class="inner-label">Aandachtspunten</div>
-            <ul class="con-list">${d.nadelen.map(n => `<li>${n}</li>`).join('')}</ul>
-          </div>
-          <div class="tab-panel${tab==='mail'?' active':''}">
-            ${renderMail(d)}
-          </div>
+        </div>
+        <div class="tab-panel${tab==='mail'?' active':''}">
+          ${renderMail(d)}
         </div>
       </div>
     </div>`;
-  }).join('');
+}
+
+function render() {
+  const container = document.getElementById('cards');
+  const filtered = activeFilter === 'all' ? data : data.filter(d => d.cat === activeFilter);
+  if (!filtered.length) { container.innerHTML = '<div class="empty">Geen kenmerken in deze categorie.</div>'; return; }
+
+  let cols = 3;
+  if (window.matchMedia('(max-width: 700px)').matches) cols = 1;
+  else if (window.matchMedia('(max-width: 900px)').matches) cols = 2;
+  const items = filtered.map(d => renderTile(d, d.id === openId));
+  const openIndex = filtered.findIndex(d => d.id === openId);
+  if (openIndex !== -1) {
+    const rowEnd = Math.min(filtered.length - 1, Math.floor(openIndex / cols) * cols + (cols - 1));
+    items.splice(rowEnd + 1, 0, renderDetail(filtered[openIndex]));
+  }
+  container.innerHTML = items.join('');
 
   container.querySelectorAll('.card').forEach(el => {
-    el.addEventListener('click', e => {
-      if (e.target.closest('.tab-btn')) return;
-      const id = parseInt(el.dataset.id);
-      openId = openId === id ? null : id;
-      render();
-    });
+    const toggle = () => { const id = parseInt(el.dataset.id); openId = openId === id ? null : id; render(); };
+    el.addEventListener('click', toggle);
     el.addEventListener('keydown', e => {
-      if (e.target.closest('.tab-btn')) return;
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const id = parseInt(el.dataset.id); openId = openId === id ? null : id; render(); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
     });
   });
 
@@ -605,7 +641,6 @@ function render() {
       e.stopPropagation();
       const id = parseInt(btn.dataset.id);
       activeTab[id] = btn.dataset.tab;
-      openId = id;
       render();
     });
   });
@@ -622,6 +657,12 @@ document.getElementById('filters').querySelectorAll('.filter-btn').forEach(btn =
 });
 
 render();
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (openId !== null) render(); }, 150);
+});
 
 const baselineToggle = document.getElementById('baselineToggle');
 const baselineBody = document.getElementById('baselineBody');
