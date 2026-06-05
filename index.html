@@ -10,45 +10,30 @@
   :root {
     --blue: #0076C0;
     --blue-dark: #005A96;
-    --blue-light: #E8F3FB;
-    --bg: #EDEBE6;
+    --blue-light: #EBF5FC;
+    --bg: #F3F5F7;
     --white: #FFFFFF;
-    --text: #1A1A1A;
-    --text-mid: #4A4A4A;
-    --text-muted: #888888;
-    --rule: #D8D6D0;
-    --rule-light: #E8E6E0;
+    --text: #111827;
+    --text-mid: #4B5563;
+    --text-muted: #9CA3AF;
+    --rule: #E5E7EB;
+    --rule-light: #F0F2F4;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,118,192,0.10), 0 2px 6px rgba(0,0,0,0.06);
   }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.6; min-height: 100vh; }
 
-  /* TOPBAR */
-  .topbar { background: var(--blue); padding: 0 2rem; }
-  .topbar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 38px; }
-  .topbar-left { font-size: 12px; font-weight: 700; color: var(--white); letter-spacing: 0.01em; }
-  .topbar-right { display: flex; gap: 1.5rem; }
-  .topbar-right a { font-size: 12px; font-weight: 500; color: var(--white); text-decoration: underline; }
-
-  /* NAVBAR */
-  .navbar { background: var(--white); border-bottom: 1px solid var(--rule); padding: 0 2rem; }
-  .navbar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .navbar-logo { display: flex; flex-direction: column; line-height: 1; }
-  .navbar-logo-text { font-size: 32px; font-weight: 800; color: var(--blue); letter-spacing: -0.04em; font-style: italic; }
-  .navbar-logo-sub { font-size: 9px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; }
-  .navbar-links { display: flex; gap: 2rem; }
-  .navbar-links a { font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; }
-  .navbar-links a:hover { color: var(--blue); }
-
   /* HEADER / HERO */
-  header { background: var(--bg); padding: 3.5rem 2rem 3rem; border-bottom: 1px solid var(--rule); }
+  header { background: var(--white); padding: 3.5rem 2rem 3rem; border-bottom: 3px solid var(--blue); }
   .header-inner { max-width: 1100px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 1rem; }
-  h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.05; color: var(--text); margin-bottom: 1.5rem; letter-spacing: -0.03em; }
-  .intro { font-size: 1.1rem; color: var(--blue); max-width: 640px; line-height: 1.7; font-weight: 700; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+  h1 { font-size: clamp(2.1rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.08; color: var(--text); margin-bottom: 1.25rem; letter-spacing: -0.03em; }
+  .intro { font-size: 1.05rem; color: var(--text-mid); max-width: 640px; line-height: 1.8; font-weight: 400; }
 
   /* ROLE BANNER */
-  .role-banner { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; margin-top: 2rem; max-width: 640px; }
-  .role-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .role-banner { display: flex; align-items: flex-start; gap: 14px; background: var(--blue-light); border-left: 3px solid var(--blue); padding: 1.125rem 1.25rem; margin-top: 2rem; max-width: 640px; border-radius: 0 6px 6px 0; }
+  .role-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
   .role-text { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
   .role-text strong { font-weight: 600; color: var(--text); display: block; margin-bottom: 3px; }
 
@@ -57,41 +42,41 @@
   .stats-bar-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
   .stat { padding: 1.5rem 2rem; border-right: 1px solid var(--rule); }
   .stat:last-child { border-right: none; }
-  .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--blue); display: block; line-height: 1; margin-bottom: 5px; letter-spacing: -0.03em; }
-  .stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+  .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--blue); display: block; line-height: 1; margin-bottom: 6px; letter-spacing: -0.03em; }
+  .stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
 
   /* FILTERS */
   .filters-section { max-width: 1100px; margin: 2.5rem auto 0; padding: 0 2rem; }
-  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
-  .filter-btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 0; border: 1px solid var(--rule); background: var(--white); color: var(--text-mid); cursor: pointer; transition: all 0.15s; }
-  .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .filter-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 18px; border-radius: 999px; border: 1.5px solid var(--rule); background: var(--white); color: var(--text-mid); cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow-sm); }
+  .filter-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  .filter-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); box-shadow: 0 2px 8px rgba(0,118,192,0.25); }
 
   /* GRID */
-  .grid-section { max-width: 1100px; margin: 1.5rem auto 0; padding: 0 2rem 6rem; }
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .grid-section { max-width: 1100px; margin: 1.75rem auto 0; padding: 0 2rem 6rem; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
   /* CARD */
-  .card { background: var(--white); overflow: hidden; cursor: pointer; transition: background 0.15s; }
-  .card:hover { background: #FAFAFA; }
-  .card.open { background: var(--blue-light); }
-  .card-top { padding: 1.5rem; display: flex; align-items: flex-start; gap: 14px; }
-  .card-num { font-size: 11px; font-weight: 600; color: var(--text-muted); min-width: 22px; padding-top: 3px; }
+  .card { background: var(--white); border-radius: 8px; overflow: hidden; cursor: pointer; box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.18s; border: 1px solid transparent; }
+  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--rule); }
+  .card.open { box-shadow: var(--shadow-md); border-color: var(--blue); }
+  .card-top { padding: 1.375rem 1.25rem; display: flex; align-items: flex-start; gap: 12px; }
+  .card-num { font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 20px; padding-top: 2px; font-variant-numeric: tabular-nums; }
   .card-info { flex: 1; }
-  .cat-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; margin-bottom: 7px; }
-  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--blue); line-height: 1.2; margin-bottom: 3px; }
-  .card-sub { font-size: 12px; color: var(--text-muted); }
-  .chevron { color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 4px; }
+  .cat-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 10px; margin-bottom: 8px; border-radius: 999px; }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: var(--blue); line-height: 1.25; margin-bottom: 2px; }
+  .card-sub { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .chevron { color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; margin-top: 3px; }
   .card.open .chevron { transform: rotate(180deg); color: var(--blue); }
 
   /* CARD DETAIL (full-width expand) */
-  .card-detail { grid-column: 1 / -1; background: var(--white); overflow: hidden; animation: detailIn 0.35s cubic-bezier(0.4,0,0.2,1); }
-  @keyframes detailIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-  .detail-inner { padding: 1.75rem 1.5rem; border-top: 2px solid var(--blue); }
+  .card-detail { grid-column: 1 / -1; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--blue); animation: detailIn 0.3s cubic-bezier(0.4,0,0.2,1); }
+  @keyframes detailIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .detail-inner { padding: 1.75rem 1.75rem; border-top: 3px solid var(--blue); }
   .detail-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem; }
   .detail-head .cat-badge { margin-bottom: 0; }
-  .detail-title { font-size: 1.3rem; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
+  .detail-title { font-size: 1.25rem; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; }
   .detail-sub { font-size: 12px; color: var(--text-muted); }
   .profiel-cols { display: grid; grid-template-columns: 1fr; gap: 0.25rem 2.5rem; }
   .casus-cols { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: start; }
@@ -101,33 +86,34 @@
   }
 
   /* TABS */
-  .tabs { display: flex; margin-bottom: 1.25rem; border-bottom: 2px solid var(--rule-light); }
-  .tab-btn { flex: 1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 8px 4px; border: none; background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+  .tabs { display: flex; margin-bottom: 1.25rem; border-bottom: 2px solid var(--rule); }
+  .tab-btn { flex: 1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 9px 6px; border: none; background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; margin-bottom: -2px; }
   .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
-  .tab-btn:hover:not(.active) { color: var(--text); }
+  .tab-btn:hover:not(.active) { color: var(--text); background: var(--rule-light); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  .inner-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; margin-top: 14px; }
+  .inner-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; margin-top: 16px; }
   .inner-label:first-child { margin-top: 0; }
-  .beroep-list { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
-  .beroep-tag { font-size: 12px; padding: 3px 10px; background: var(--blue-light); color: var(--blue-dark); border: none; font-weight: 500; }
+  .beroep-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+  .beroep-tag { font-size: 12px; padding: 4px 12px; background: var(--blue-light); color: var(--blue-dark); border: none; font-weight: 500; border-radius: 999px; }
+  .functie-tag { font-size: 12px; padding: 4px 12px; background: var(--rule-light); color: var(--text-mid); border: 1px solid var(--rule); font-weight: 500; border-radius: 999px; }
   .pro-list, .con-list { list-style: none; padding: 0; }
-  .pro-list li, .con-list li { font-size: 13px; line-height: 1.55; color: var(--text-mid); padding: 3px 0 3px 20px; position: relative; }
-  .pro-list li::before { content: '+'; position: absolute; left: 0; font-weight: 700; color: #1E7A45; }
-  .con-list li::before { content: '–'; position: absolute; left: 0; font-weight: 700; color: #B03A2E; }
-  .divider { height: 1px; background: var(--rule-light); margin: 12px 0; }
+  .pro-list li, .con-list li { font-size: 13px; line-height: 1.6; color: var(--text-mid); padding: 4px 0 4px 22px; position: relative; }
+  .pro-list li::before { content: '+'; position: absolute; left: 0; font-weight: 700; color: #16A34A; }
+  .con-list li::before { content: '–'; position: absolute; left: 0; font-weight: 700; color: #DC2626; }
+  .divider { height: 1px; background: var(--rule); margin: 14px 0; }
 
   /* EMAIL MOCKUP */
-  .email-mockup { background: var(--bg); border: 1px solid var(--rule); overflow: hidden; font-size: 13px; }
-  .email-header { padding: 12px 14px; border-bottom: 1px solid var(--rule); background: var(--white); }
+  .email-mockup { background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; font-size: 13px; }
+  .email-header { padding: 14px 16px; border-bottom: 1px solid var(--rule); background: var(--white); }
   .email-meta-row { display: flex; gap: 6px; margin-bottom: 3px; font-size: 12px; color: var(--text-muted); }
-  .email-meta-row strong { color: var(--text-mid); font-weight: 500; min-width: 28px; }
-  .email-subject { font-weight: 700; font-size: 13px; color: var(--text); margin-top: 8px; }
-  .email-body { padding: 14px; line-height: 1.65; color: var(--text-mid); white-space: pre-wrap; }
-  .email-actions { padding: 10px 14px 14px; border-top: 1px solid var(--rule); }
-  .email-actions-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-  .action-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule-light); font-size: 12px; color: var(--text-mid); }
+  .email-meta-row strong { color: var(--text-mid); font-weight: 500; min-width: 30px; }
+  .email-subject { font-weight: 700; font-size: 13px; color: var(--text); margin-top: 9px; }
+  .email-body { padding: 14px 16px; line-height: 1.7; color: var(--text-mid); white-space: pre-wrap; }
+  .email-actions { padding: 10px 16px 14px; border-top: 1px solid var(--rule); background: var(--white); }
+  .email-actions-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
+  .action-item { display: flex; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--rule-light); font-size: 12px; color: var(--text-mid); }
   .action-item:last-child { border-bottom: none; }
   .action-num { font-weight: 700; color: var(--blue); min-width: 16px; }
   .action-who { font-weight: 700; color: var(--text); min-width: 70px; flex-shrink: 0; }
@@ -135,39 +121,39 @@
   .action-when { color: var(--text-muted); white-space: nowrap; font-size: 11px; flex-shrink: 0; }
 
   /* TRAINER NOTE */
-  .trainer-note { background: var(--blue-light); border-left: 3px solid var(--blue); padding: 10px 14px; margin-top: 10px; font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .trainer-note { background: var(--blue-light); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; padding: 12px 16px; margin-top: 10px; font-size: 12px; color: var(--text-mid); line-height: 1.65; }
   .trainer-note strong { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; color: var(--blue); }
 
   /* BASELINE SECTION */
   .baseline-section { max-width: 1100px; margin: 2.5rem auto 0; padding: 0 2rem; }
-  .baseline-header { display: flex; align-items: center; gap: 16px; margin-bottom: 0.75rem; }
-  .baseline-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
-  .baseline-title { font-size: 1.15rem; font-weight: 700; color: var(--blue); }
-  .baseline-intro { font-size: 13px; color: var(--text-mid); line-height: 1.65; max-width: 680px; margin-bottom: 1rem; }
-  .baseline-toggle { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 9px 20px; border: none; background: var(--blue); color: var(--white); cursor: pointer; transition: background 0.15s; margin-bottom: 1.25rem; display: inline-flex; align-items: center; gap: 7px; }
-  .baseline-toggle:hover { background: var(--blue-dark); }
+  .baseline-section.hidden { display: none; }
+  .baseline-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+  .baseline-label { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted); }
+  .baseline-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .baseline-intro { font-size: 13px; color: var(--text-mid); line-height: 1.7; max-width: 680px; margin-bottom: 1rem; }
+  .baseline-toggle { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 9px 20px; border: 1.5px solid var(--blue); background: var(--white); color: var(--blue); cursor: pointer; transition: all 0.15s; margin-bottom: 1.25rem; display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; box-shadow: var(--shadow-sm); }
+  .baseline-toggle:hover, .baseline-toggle.open { background: var(--blue); color: var(--white); }
   .baseline-toggle .bl-chevron { transition: transform 0.25s; }
   .baseline-toggle.open .bl-chevron { transform: rotate(180deg); }
   .baseline-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
   .baseline-body.open { max-height: 1400px; }
 
   /* FOOTER */
-  footer { background: var(--blue); padding: 2rem; text-align: center; font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 0; }
+  footer { background: #111827; padding: 2rem; text-align: center; font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 0; }
   footer strong { color: var(--white); font-weight: 700; }
-  .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-muted); font-style: italic; background: var(--white); }
+  .empty { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-muted); font-style: italic; background: var(--white); border-radius: 8px; box-shadow: var(--shadow-sm); }
 
   @media (max-width: 900px) {
     .cards { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 700px) {
-    .navbar-links, .topbar-right { display: none; }
     header { padding: 2rem 1.25rem; }
     .stats-bar-inner { grid-template-columns: 1fr; }
     .stat { border-right: none; border-bottom: 1px solid var(--rule); }
     .stat:last-child { border-bottom: none; }
     .filters-section, .grid-section, .baseline-section { padding-left: 1.25rem; padding-right: 1.25rem; }
-    .cards { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; gap: 0.75rem; }
   }
 </style>
 </head>
@@ -295,6 +281,7 @@ const data = [
   {
     id: 1, naam: 'ADHD', sub: 'Attention Deficit Hyperactivity Disorder', cat: 'aandacht',
     beroepen: ['Ondernemer', 'Designer', 'Sales', 'Crisishulpverlening', 'Journalist'],
+    functies: ['Projectleider', 'Teamleider', 'Accountmanager', 'Ondernemer / ZZP\'er', 'Communicatieadviseur', 'Verandermanager'],
     voordelen: ['Hoge energie en drive, sterk in korte sprints', 'Creatief en associatief denken', 'Snel schakelen en improviseren', 'Uitblinkend in crisismanagement'],
     nadelen: ['Moeite met langdurige, repetitieve focus', 'Uitstellen van routinetaken', 'Vergeetachtigheid en ongeorganiseerdheid', 'Impulsieve beslissingen onder druk'],
     mail: {
@@ -320,6 +307,7 @@ Ik had nog een briljant idee tijdens de meeting over de entreehal maar dat ben i
   {
     id: 2, naam: 'Autisme (ASS)', sub: 'Autismespectrumstoornis', cat: 'sociaal',
     beroepen: ['IT & softwareontwikkeling', 'Wetenschappelijk onderzoek', 'Data-analyse', 'Kwaliteitscontrole', 'Actuariaat'],
+    functies: ['Data-analist', 'Kwaliteitsspecialist', 'IT-specialist', 'Procesontwerper', 'Compliance officer', 'Inhoudelijk specialist'],
     voordelen: ['Uitzonderlijke diepgang en detailgerichtheid', 'Consistent, betrouwbaar en voorspelbaar', 'Hoog kennisspecialisme in één domein', 'Sterk in logica en systeemdenken'],
     nadelen: ['Moeite met impliciete sociale communicatie', 'Overgevoeligheid voor omgevingsprikkels', 'Onverwachte veranderingen veroorzaken stress', 'Aanpassen aan sociale codes kost energie'],
     mail: {
@@ -345,6 +333,7 @@ Afwijkingen t.o.v. de agenda: agendapunt 4 (installaties) is niet behandeld wege
   {
     id: 3, naam: 'Dyslexie', sub: 'Lees- en schrijfstoornis', cat: 'leren',
     beroepen: ['Architect', 'Ondernemer', 'Design & kunst', 'Chirurg', 'Ingenieur'],
+    functies: ['Leidinggevende / Directeur', 'Ondernemer', 'Teamleider', 'Strategisch adviseur', 'Projectleider', 'Conceptontwikkelaar'],
     voordelen: ['Sterk ruimtelijk en visueel denken', 'Creatief probleemoplossen', 'Groot geheel snel overzien', 'Lateraal denkvermogen boven gemiddeld'],
     nadelen: ['Traag lezen en schrijven in tekst-intensief werk', 'Spelfouten in formele communicatie', 'Moeite met uitgebreide schriftelijke rapportage', 'Onzekerheid in tekstzware omgevingen'],
     mail: {
@@ -368,6 +357,7 @@ De gevels zijn ook langs gekoment. Karin had een goed idee over kleuraccenten bi
   {
     id: 4, naam: 'Hoogsensitiviteit', sub: 'Highly Sensitive Person (HSP)', cat: 'sensorisch',
     beroepen: ['HR & coaching', 'Gezondheidszorg', 'Kunst & muziek', 'Counseling', 'Klantenservice'],
+    functies: ['HR-adviseur', 'Coach / Vertrouwenspersoon', 'Leidinggevende', 'Relatiemanager', 'Projectleider', 'Trainer'],
     voordelen: ['Sterke empathie en fijne mensenkennis', 'Nuanceert communicatie subtiel en effectief', 'Vroeg signaleren van spanningen in teams', 'Hoge kwaliteitsstandaard in eigen werk'],
     nadelen: ['Snel overprikkeld in drukke omgevingen', 'Moeite met conflicten en directe kritiek', 'Emotionele belasting leidt tot vermoeidheid', 'Grenzen stellen gaat niet vanzelf'],
     mail: {
@@ -391,6 +381,7 @@ Inhoudelijk: we hebben besloten de routing op de begane grond aan te passen (bre
   {
     id: 5, naam: 'Dyscalculie', sub: 'Rekenstoornis', cat: 'leren',
     beroepen: ['Communicatie & PR', 'Kunst & creatieve sector', 'Pedagogiek', 'Taal & journalistiek'],
+    functies: ['Communicatieadviseur', 'Beleidsmedewerker', 'Adviseur', 'Trainer / Opleider', 'Projectcoördinator', 'Omgevingsmanager'],
     voordelen: ['Alternatieve strategieën voor probleemoplossing', 'Sterk verbaal en narratief denkvermogen', 'Creatieve benadering van vraagstukken', 'Compenserend sterk in kwalitatieve analyse'],
     nadelen: ['Fouten in financiële berekeningen en budgetten', 'Moeite met tijdsinschatting en plannen', 'Onzekerheid bij data-presentaties', 'Vermijding van getalsmatige taken'],
     mail: {
@@ -414,6 +405,7 @@ Er kwamen ook wat getallen langs: iemand noemde een breedte van 1,2 of misschien
   {
     id: 6, naam: 'Dyspraxie (DCD)', sub: 'Ontwikkelingscoördinatiestoornis', cat: 'executief',
     beroepen: ['IT & programmering', 'Schrijven & journalistiek', 'Adviseur & consultant', 'Wetenschappelijk onderzoek'],
+    functies: ['Adviseur / Consultant', 'Onderzoeker', 'Beleidsspecialist', 'Kennismanager', 'Inhoudelijk specialist', 'Trainer'],
     voordelen: ['Uitstekend verbaal en analytisch denkvermogen', 'Creatief en out-of-the-box', 'Groot doorzettingsvermogen', 'Empathisch door eigen ervaringskennis'],
     nadelen: ['Moeite met motorische taken als schrijven en typen', 'Traag in routinehandelingen', 'Organisatie van ruimte en tijd is lastig', 'Uitputting bij meervoudige taken tegelijk'],
     mail: {
@@ -437,6 +429,7 @@ Ik heb alles goed onthouden want ik luister altijd heel goed — aantekeningen m
   {
     id: 7, naam: 'Executieve disfunctie', sub: 'Zwakke plannings- en regulatiefuncties', cat: 'executief',
     beroepen: ['Creatieve beroepen', 'Zelfstandig ondernemer', 'Wetenschappelijk onderzoek', 'Adviseur'],
+    functies: ['ZZP\'er / Freelancer', 'Conceptontwikkelaar', 'Creatief specialist', 'Innovatiemedewerker', 'Onderzoeker', 'Zelfstandig adviseur'],
     voordelen: ['Sterk in open, creatieve en vrije taken', 'Flexibel bij ongestructureerde problemen', 'Energie-uitbarstingen bij passend werk', 'Onconventioneel probleemoplossen'],
     nadelen: ['Moeite met deadlines en prioriteiten stellen', 'Taken beginnen of afronden kost buitensporig veel energie', 'Overzicht bewaren bij complexe projecten', 'Afhankelijkheid van externe structuur en reminders'],
     mail: {
@@ -460,6 +453,7 @@ Ik ga dit uitzoeken maar ik weet niet wanneer ik er aan toekom — mijn agenda i
   {
     id: 8, naam: 'Tourette & tics', sub: 'Motorische of vocale ticstoornissen', cat: 'sensorisch',
     beroepen: ['Muziek & performance', 'Technologie & programmering', 'Academisch onderzoek', 'Zelfstandige beroepen'],
+    functies: ['Technisch specialist', 'Leidinggevende', 'Onderzoeker', 'Projectleider', 'Creatief professional', 'Zelfstandig professional'],
     voordelen: ['Hoge creativiteit en associatief denkvermogen', 'Doorzettingsvermogen door dagelijkse uitdagingen', 'Sterk aanpassingsvermogen opgebouwd', 'Humor en goed relativeringsvermogen'],
     nadelen: ['Sociale spanning door onvrijwillige tics in vergaderingen', 'Concentratieproblemen door het onderdrukken van tics', 'Vermoeidheid door constante zelfcontrole', 'Risico op stigma of onbegrip op de werkvloer'],
     mail: {
@@ -483,6 +477,7 @@ Ik wil er even bij zeggen: als mijn tikken of bewegen vandaag opviel en afleidin
   {
     id: 9, naam: 'Hoog intelligentie', sub: 'Tweede-orde denken & overexcitabiliteit', cat: 'sociaal',
     beroepen: ['Wetenschap & R&D', 'Strategie & consultancy', 'Recht', 'Technologie', 'Filosofie & ethiek'],
+    functies: ['Strategisch adviseur', 'Senior consultant', 'Leidinggevende / Directeur', 'Beleidsmaker', 'Onderzoeker', 'Innovatiemanager'],
     voordelen: ['Snel leren en diepgaand analyseren', 'Verbanden leggen over disciplines heen', 'Sterke intrinsieke motivatie', 'Hoge normen en kwaliteitsdrift'],
     nadelen: ['Verveling en afhaken bij routinewerk', 'Moeite met gelijkdenken in teams', 'Perfectionisme als blokkade voor actie', 'Sociale isolatie door kenniskloof'],
     mail: {
@@ -506,6 +501,7 @@ Ik wil wel een kanttekening plaatsen bij het besluit over de routing: 1,2 m is d
   {
     id: 10, naam: 'Sociale angst', sub: 'Angststoornis in sociale & professionele context', cat: 'sociaal',
     beroepen: ['Schrijven & onderzoek', 'IT & remote werk', 'Boekhouding & administratie', 'Archief & documentatie'],
+    functies: ['Inhoudelijk expert', 'Analist', 'Projectleider', 'Onderzoeker', 'Beleidsspecialist', 'Schrijver / Redacteur'],
     voordelen: ['Grondig en uiterst zorgvuldig in werk', 'Sterk voorbereidingsvermogen', 'Empathie voor drempelervaring van anderen', 'Introverte kracht: diepgang en reflectie'],
     nadelen: ['Presentaties en vergaderingen kosten buitensporig veel energie', 'Vermijding van conflicten of het geven van feedback', 'Netwerken en zichtbaarheid zijn moeilijk', 'Overanalyse leidt tot besluiteloosheid'],
     mail: {
@@ -593,6 +589,8 @@ function renderDetail(d) {
         <div class="tab-panel${tab==='info'?' active':''}">
           <div class="inner-label">Passende beroepen</div>
           <div class="beroep-list">${d.beroepen.map(b => `<span class="beroep-tag">${b}</span>`).join('')}</div>
+          <div class="inner-label" style="margin-top:12px;">Typische functies en rollen</div>
+          <div class="beroep-list">${d.functies.map(f => `<span class="functie-tag">${f}</span>`).join('')}</div>
           <div class="divider"></div>
           <div class="profiel-cols">
             <div>
@@ -646,12 +644,15 @@ function render() {
   });
 }
 
+const baselineSection = document.querySelector('.baseline-section');
+
 document.getElementById('filters').querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     activeFilter = btn.dataset.cat;
     openId = null;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    baselineSection.classList.toggle('hidden', activeFilter !== 'all');
     render();
   });
 });
