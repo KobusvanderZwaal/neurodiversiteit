@@ -33,7 +33,9 @@ Maak voor elk van de 10 neurodiverse kenmerken in `kenmerken.json` een karakteri
 - Schrijf onder elke mail een **trainerstoelichting** van 2–4 zinnen: waar moet de kijker op letten, welke sterke kant zie je terug, welke valkuil. Benoem het gedrag, niet de persoon.
 
 **OUTPUT**
-Geef `kenmerken.json` terug met de velden `mail` en `toelichting` per kenmerk ingevuld. Verder niets wijzigen.
+Geef `kenmerken.json` terug met de velden `mail` en `toelichting` per kenmerk ingevuld. Verder niets wijzigen — geen andere velden aanpassen, geen kenmerken toevoegen of weglaten.
+
+Lever het resultaat op als **downloadbaar bestand**, niet als tekst in de chat. Tien mails plus toelichtingen is een lange output; in de chat loopt die kans op afkappen en moet ik hem handmatig overnemen. Controleer vóór oplevering dat het bestand geldige JSON is.
 
 ---
 
