@@ -1,0 +1,241 @@
+{
+  "titel": "Neurodiversiteit op de werkvloer",
+  "categorieen": {
+    "aandacht":   { "naam": "Aandacht",   "badge": "#B5D4F4", "tekst": "#0C447C" },
+    "sociaal":    { "naam": "Sociaal",    "badge": "#CECBF6", "tekst": "#3C3489" },
+    "executief":  { "naam": "Executief",  "badge": "#D3D1C7", "tekst": "#444441" },
+    "sensorisch": { "naam": "Sensorisch", "badge": "#F4C0D1", "tekst": "#72243E" },
+    "leren":      { "naam": "Leren",      "badge": "#C0DD97", "tekst": "#27500A" }
+  },
+  "kenmerken": [
+    {
+      "id": 1,
+      "naam": "ADHD",
+      "label": "Aandacht & energie",
+      "cat": "aandacht",
+      "color": "#B5D4F4",
+      "tcolor": "#0C447C",
+      "beroepen": ["Ondernemer", "Designer", "Sales", "Crisis- & hulpverlening", "Journalist"],
+      "voordelen": [
+        "Hoge energie en drive in projecten",
+        "Creatief en associatief denken",
+        "Snel schakelen en improviseren",
+        "Sterk in crisismanagement"
+      ],
+      "nadelen": [
+        "Moeite met langdurige focus",
+        "Uitstellen van routinetaken",
+        "Vergeetachtigheid en ongeorganiseerdheid",
+        "Impulsieve beslissingen"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 2,
+      "naam": "Autisme (ASS)",
+      "label": "Sociaal & sensorisch",
+      "cat": "sociaal",
+      "color": "#CECBF6",
+      "tcolor": "#3C3489",
+      "beroepen": ["IT & softwareontwikkeling", "Wetenschappelijk onderzoek", "Data-analyse", "Kwaliteitscontrole", "Actuariaat"],
+      "voordelen": [
+        "Uitzonderlijke diepgang en detailgerichtheid",
+        "Consistent en betrouwbaar",
+        "Hoog kennisspecialisme in één domein",
+        "Integriteit en eerlijkheid"
+      ],
+      "nadelen": [
+        "Moeite met impliciete communicatie",
+        "Overgevoeligheid voor omgevingsprikkels",
+        "Onverwachte veranderingen veroorzaken stress",
+        "Beperkt sociaal aanpassingsvermogen"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 3,
+      "naam": "Dyslexie",
+      "label": "Lezen & schrijven",
+      "cat": "leren",
+      "color": "#FAC775",
+      "tcolor": "#633806",
+      "beroepen": ["Architect", "Ondernemer", "Beeldende kunst & design", "Chirurg", "Engineer"],
+      "voordelen": [
+        "Sterk ruimtelijk inzicht",
+        "Creatief probleemoplossen",
+        "Groot geheel snel overzien",
+        "Visueel sterk denken"
+      ],
+      "nadelen": [
+        "Traag lezen en schrijven",
+        "Spelfouten in formele communicatie",
+        "Moeite met schriftelijke rapportage",
+        "Onzekerheid in tekstzware omgevingen"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 4,
+      "naam": "Hoogsensitiviteit (HSP)",
+      "label": "Sensorisch & emotioneel",
+      "cat": "sensorisch",
+      "color": "#F4C0D1",
+      "tcolor": "#72243E",
+      "beroepen": ["HR & coaching", "Gezondheidszorg", "Kunst & muziek", "Counseling", "Klantenservice"],
+      "voordelen": [
+        "Sterke empathie en mensenkennis",
+        "Nuanceert communicatie fijn af",
+        "Vroeg signaleren van spanningen",
+        "Hoge kwaliteitsstandaard"
+      ],
+      "nadelen": [
+        "Snel overprikkeld in drukke omgevingen",
+        "Moeite met conflicten en kritiek",
+        "Vermoeidheid door emotionele belasting",
+        "Grenzen aangeven is lastig"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 5,
+      "naam": "Dyscalculie",
+      "label": "Rekenen & cijfers",
+      "cat": "leren",
+      "color": "#C0DD97",
+      "tcolor": "#27500A",
+      "beroepen": ["Communicatie & PR", "Kunst & creatieve sector", "Pedagogiek", "Taalkundige beroepen"],
+      "voordelen": [
+        "Alternatieve strategieën voor probleemoplossing",
+        "Sterk verbaal en narratief denken",
+        "Creatieve benadering van vraagstukken"
+      ],
+      "nadelen": [
+        "Fouten in financiële berekeningen",
+        "Moeite met tijdsinschatting en planning",
+        "Onzekerheid bij data-presentaties",
+        "Vermijding van getalsmatige taken"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 6,
+      "naam": "Dyspraxie (DCD)",
+      "label": "Motoriek & coördinatie",
+      "cat": "executief",
+      "color": "#9FE1CB",
+      "tcolor": "#085041",
+      "beroepen": ["IT & programmering", "Schrijven & journalistiek", "Adviseur & consultant", "Onderzoek"],
+      "voordelen": [
+        "Uitstekend verbaal en analytisch denken",
+        "Creatief en out-of-the-box",
+        "Groot doorzettingsvermogen",
+        "Empathisch door eigen ervaringen"
+      ],
+      "nadelen": [
+        "Moeite met motorische taken (schrijven, typen)",
+        "Traag in routinehandelingen",
+        "Organisatie van ruimte en tijd lastig",
+        "Uitputting bij meervoudige taken"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 7,
+      "naam": "Executieve disfunctie",
+      "label": "Planning & regulatie",
+      "cat": "executief",
+      "color": "#D3D1C7",
+      "tcolor": "#444441",
+      "beroepen": ["Creatieve beroepen", "Zelfstandig ondernemer (met structuur)", "Onderzoek", "Adviseur"],
+      "voordelen": [
+        "Sterk in creatieve en vrije taken",
+        "Flexibel bij ongestructureerde problemen",
+        "Energie-uitbarstingen bij passend werk",
+        "Onconventioneel probleemoplossen"
+      ],
+      "nadelen": [
+        "Moeite met deadlines en prioriteiten stellen",
+        "Taken beginnen of afronden kost veel energie",
+        "Overzicht bewaren bij complexe projecten",
+        "Afhankelijkheid van externe structuur"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 8,
+      "naam": "Tourette & tics",
+      "label": "Motorisch & vocaal",
+      "cat": "sensorisch",
+      "color": "#F5C4B3",
+      "tcolor": "#712B13",
+      "beroepen": ["Muziek & performance", "Technologie & programmering", "Academisch onderzoek", "Zelfstandige beroepen"],
+      "voordelen": [
+        "Hoge creativiteit en associatief denken",
+        "Doorzettingsvermogen door dagelijkse uitdagingen",
+        "Sterk aanpassingsvermogen",
+        "Humor en relativeringsvermogen"
+      ],
+      "nadelen": [
+        "Sociale spanning door onvrijwillige tics",
+        "Concentratieproblemen door tic-onderdrukking",
+        "Vermoeidheid door constante controle",
+        "Stigma op de werkvloer"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 9,
+      "naam": "Hoge intelligentie (2e orde)",
+      "label": "Cognitief & sociaal",
+      "cat": "sociaal",
+      "color": "#EEEDFE",
+      "tcolor": "#534AB7",
+      "beroepen": ["Wetenschap & R&D", "Strategie & consultancy", "Recht", "Technologie", "Filosofie & ethiek"],
+      "voordelen": [
+        "Snel leren en diepe analyse",
+        "Verbanden leggen over disciplines heen",
+        "Sterke intrinsieke motivatie",
+        "Hoge normen en kwaliteitsdrift"
+      ],
+      "nadelen": [
+        "Verveling bij routinewerk",
+        "Moeite met gelijkdenken in teams",
+        "Perfectionisme als blokkade",
+        "Sociale isolatie door kenniskloof"
+      ],
+      "mail": "",
+      "toelichting": ""
+    },
+    {
+      "id": 10,
+      "naam": "Angst & sociale fobie",
+      "label": "Emotioneel & sociaal",
+      "cat": "sociaal",
+      "color": "#E6F1FB",
+      "tcolor": "#185FA5",
+      "beroepen": ["Schrijven & onderzoek", "IT & remote werk", "Boekhouding & administratie", "Bibliotheek & archief"],
+      "voordelen": [
+        "Grondig en zorgvuldig in werk",
+        "Sterk voorbereidingsvermogen",
+        "Empathie voor anderen met een drempel",
+        "Introverte kracht: diepgang en reflectie"
+      ],
+      "nadelen": [
+        "Presentaties en vergaderingen kosten veel energie",
+        "Vermijding van conflicten of feedback geven",
+        "Netwerken en zichtbaarheid lastig",
+        "Overanalyse leidt tot besluiteloosheid"
+      ],
+      "mail": "",
+      "toelichting": ""
+    }
+  ]
+}
