@@ -10,7 +10,7 @@ Een interactieve referentiepagina voor gebruik bij werksessies over neurodiversi
 
 Bovenaan staat een neutrale basismail — dezelfde vergadering, zonder uitgesproken kenmerk — als vergelijkingsbasis. Alle negen casusmails vatten hetzelfde ontwerpoverleg samen (project De Werf, verzonnen collega's); alleen de vorm verschilt.
 
-De pagina volgt de ABT-huisstijl (blauw #0076C0, warmgrijze achtergrond, Inter) en heeft een donkere variant die de systeeminstelling volgt.
+De pagina volgt de ABT-huisstijl (blauw #0076C0, warmgrijze achtergrond, Inter) in een ronde, zachte uitvoering, en heeft een donkere variant die de systeeminstelling volgt. Elke kenmerk-kaart heeft een eigen kleur en motief die bij het kenmerk passen (zie `color`, `tcolor` en `motief` in de JSON).
 
 ---
 
@@ -35,8 +35,9 @@ neurodiversiteit/
 ### Wat werkt
 
 - Negen kenmerk-kaarten in een raster van 3 / 2 / 1 kolommen (3×3 op een computer, één kolom op een telefoon), met categoriefilter (Alle / Aandacht / Sociaal / Executief / Sensorisch / Leren) en aantallen per categorie.
+- Elke kaart draagt de kleur en het motief van het kenmerk: `color` (pasteltint), `tcolor` (tekst- en accentkleur) en `motief` uit de JSON. Beschikbare motieven in `index.html`: `vonk`, `raster`, `letters`, `gloed`, `cijfers`, `stippellijn`, `puls`, `lagen`, `sluier`. Ontbreekt `motief`, dan krijgt de kaart alleen de tint. Het detailpaneel neemt de kleur van het geopende kenmerk over; de mailmockup blijft bewust neutraal.
 - Aanklikken opent een detailpaneel over de volle breedte direct onder de rij van die kaart (master-detail); Esc of × sluit het. Met ‹ › blader je door de kenmerken zonder terug te hoeven naar het raster — handig tijdens een sessie.
-- Twee tabs per kenmerk: **Profiel** (beroepen, functies en rollen, voordelen en aandachtspunten naast elkaar) en **Casus: mail** (mailmockup over de volle breedte met de toelichting eronder). De gekozen tab blijft staan bij het bladeren, zodat je alle mails achter elkaar kunt vergelijken.
+- Twee tabs per kenmerk: **Profiel** (beroepen en functies als doorlopende regel met scheidingstekens, voordelen en aandachtspunten naast elkaar) en **Casus: mail** (mailmockup over de volle breedte met de toelichting eronder). De gekozen tab blijft staan bij het bladeren, zodat je alle mails achter elkaar kunt vergelijken.
 - Neutrale basismail als aparte sectie met toon/verberg-knop; deze blijft staan bij filteren.
 - Mailweergave: de eerste regel `Onderwerp: …` uit de JSON wordt de kop, de laatste regel de afzender; de rest wordt letterlijk getoond, inclusief regelafbrekingen en spelfouten (die zijn onderdeel van de casus).
 - Toetsenbordbediening: kaarten, filters en tabs zijn knoppen met zichtbare focus.
@@ -49,6 +50,7 @@ neurodiversiteit/
 - Veld `functies` (typische functies en rollen) per kenmerk teruggezet in de JSON; dat stond in de juni-versie wel in de pagina maar ontbrak in `kenmerken.json`.
 - Donkere variant toegevoegd; navigatie ‹ › in het detailpaneel.
 - Dyspraxie (DCD) verwijderd op verzoek van Kobus; negen kenmerken over, de oorspronkelijke id's zijn behouden (6 ontbreekt). De aantallen in kop en intro komen nu uit de data.
+- Rondere vormgeving (afgeronde kaarten, panelen en knoppen), kaartstijl per kenmerk in plaats van een categorielabel, en beroepen/functies als doorlopende regel in plaats van losse blokjes. Per kenmerk eigen `color`/`tcolor` in de JSON en een nieuw veld `motief`.
 
 ---
 
@@ -61,7 +63,8 @@ neurodiversiteit/
 | Eén vaste vergadering en vaste verzonnen collega's in alle mails | Zo zie je dat het kenmerk in de vorm zit, niet in de inhoud |
 | Neutrale basismail als apart object en aparte sectie | Expliciete vergelijkingsbasis vóór de negen varianten |
 | Driebreed raster, detailpaneel over de volle breedte | Compact overzicht; details krijgen de ruimte |
-| Geen navigatiebalk, geen afgeronde hoeken | Standalone tool in de strakke ABT-stijl |
+| Geen navigatiebalk | Standalone tool, geen onderdeel van de ABT-website |
+| Ronde, zachte uitvoering en een eigen kaartstijl per kenmerk | De vorm van de kaart zegt iets over het kenmerk, net als de vorm van de mail; een kaal raster deed dat niet (keuze Kobus, 18 sep 2026) |
 
 ---
 
@@ -69,7 +72,7 @@ neurodiversiteit/
 
 1. **Mails opnieuw laten schrijven**: plak de prompt uit `PROMPT.md` samen met `kenmerken.json` in Claude; laat alleen `mail` en `toelichting` invullen. Zet het resultaat terug als `kenmerken.json`.
 2. **Losse tekst wijzigen**: pas de tekst in `kenmerken.json` aan. Let op: `\n` is een regelafbreking, aanhalingstekens in de tekst als `\"`. Controleer daarna dat het bestand geldige JSON is (bijvoorbeeld via jsonlint.com).
-3. **Kenmerk toevoegen**: kopieer een object in `kenmerken`, geef het een nieuw `id` en een bestaande `cat`. De pagina pikt het automatisch op; ontbreekt `functies`, dan laat de pagina dat blok gewoon weg.
+3. **Kenmerk toevoegen**: kopieer een object in `kenmerken`, geef het een nieuw `id` en een bestaande `cat`, en kies een `color`, `tcolor` en `motief`. De pagina pikt het automatisch op; ontbreekt `functies` of `motief`, dan laat de pagina dat gewoon weg.
 
 ---
 
