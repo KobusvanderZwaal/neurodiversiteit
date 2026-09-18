@@ -2,15 +2,15 @@
 
 ## Doel van het project
 
-Een interactieve referentiepagina voor gebruik bij informatiesessies over neurodiversiteit bij ABT. De pagina geeft een overzicht van de tien meest voorkomende neurodiverse kenmerken op de werkvloer, met per kenmerk:
+Een interactieve referentiepagina voor gebruik bij werksessies over neurodiversiteit bij ABT. De pagina toont tien veelvoorkomende neurodiverse kenmerken op de werkvloer, met per kenmerk:
 
-- Een profiel (passende beroepen, voordelen, aandachtspunten)
-- Een realistische casus: een vergaderverslag-mail geschreven vanuit dat kenmerk
-- Een toelichting die de herkenbare patronen duidt
+- Een profiel (passende beroepen, typische functies en rollen, voordelen, aandachtspunten)
+- Een casus: een vergaderverslag-mail geschreven vanuit dat kenmerk
+- Een toelichting voor de trainer: waar let je op, welke kracht, welke valkuil
 
-Als referentie staat bovenaan een neutrale basismail — dezelfde situatie, zonder uitgesproken neurodiverse kenmerken — zodat deelnemers de varianten direct kunnen vergelijken.
+Bovenaan staat een neutrale basismail — dezelfde vergadering, zonder uitgesproken kenmerk — als vergelijkingsbasis. Alle tien de casusmails vatten hetzelfde ontwerpoverleg samen (project De Werf, verzonnen collega's); alleen de vorm verschilt.
 
-De pagina volgt de ABT huisstijl (blauw #0076C0, warme grijze achtergrond, Inter font).
+De pagina volgt de ABT-huisstijl (blauw #0076C0, warmgrijze achtergrond, Inter) en heeft een donkere variant die de systeeminstelling volgt.
 
 ---
 
@@ -18,35 +18,36 @@ De pagina volgt de ABT huisstijl (blauw #0076C0, warme grijze achtergrond, Inter
 
 ```
 neurodiversiteit/
-├── index.html       # Volledige applicatie — HTML, CSS en JavaScript in één bestand
+├── index.html       # De pagina — HTML, CSS en JavaScript in één bestand; leest kenmerken.json
+├── kenmerken.json   # Alle inhoud: titel, categorieën, basismail en tien kenmerken met mail en toelichting
+├── PROMPT.md        # De prompt waarmee de casusmails en toelichtingen worden (her)gegenereerd
 └── CONTEXT.md       # Dit bestand
 ```
 
-Alles zit in één `index.html`. Er is geen buildstap, geen framework, geen dependencies behalve Google Fonts (Inter). De pagina werkt direct als je het bestand opent in een browser.
+**`kenmerken.json` is de enige bron van de inhoud.** `index.html` bevat geen teksten van kenmerken; die worden bij het laden uit de JSON gehaald. Teksten aanpassen = de JSON aanpassen, niets aan de HTML.
+
+`index.html` heeft wel een ingesloten kopie van de JSON als terugvaloptie: een browser mag een lokaal geopend bestand (`file://`) geen `kenmerken.json` laten ophalen. Open je `index.html` rechtstreeks vanaf schijf, dan zie je de kopie van de bouwdatum en meldt de pagina dat bovenaan. Op GitHub Pages wordt altijd de actuele JSON geladen.
 
 ---
 
-## Huidige stand (laatst bijgewerkt: 4 juni 2026)
+## Huidige stand (laatst bijgewerkt: 18 september 2026)
 
 ### Wat werkt
 
-- De pagina draait volledig client-side vanuit één `index.html` — geen server, geen build, geen dependencies behalve Google Fonts.
-- Tien kenmerk-kaarten plus de neutrale basismail, volledig in ABT-huisstijl.
-- **Categoriefilter** (Alle / Aandacht / Sociaal / Executief / Sensorisch / Leren) toont en verbergt kaarten; de basismail-sectie blijft daarbij altijd staan.
-- **Uitklappen over de volle breedte** (master-detail): klik je een tegel aan, dan licht die op en verschijnt het detailpaneel over de volle paginabreedte, direct onder de rij van die tegel — zonder lege gaten in het grid en met behoud van de kaartvolgorde.
-- **Twee tabs per detailpaneel:** *Profiel* (passende beroepen, plus voordelen en aandachtspunten in twee kolommen naast elkaar) en *Casus: mail* (de mailmockup over de volle breedte met de toelichting eronder).
-- Basismail-sectie met een toon/verberg-knop.
-- **Responsief:** 3 kolommen (≥ 901px), 2 kolommen (701–900px), 1 kolom (≤ 700px); het detailpaneel wordt bij resize correct opnieuw onder de juiste rij geplaatst.
-- Toetsenbordbediening: tegels zijn met Enter/Spatie te openen.
+- Tien kenmerk-kaarten in een raster van 3 / 2 / 1 kolommen, met categoriefilter (Alle / Aandacht / Sociaal / Executief / Sensorisch / Leren) en aantallen per categorie.
+- Aanklikken opent een detailpaneel over de volle breedte direct onder de rij van die kaart (master-detail); Esc of × sluit het. Met ‹ › blader je door de kenmerken zonder terug te hoeven naar het raster — handig tijdens een sessie.
+- Twee tabs per kenmerk: **Profiel** (beroepen, functies en rollen, voordelen en aandachtspunten naast elkaar) en **Casus: mail** (mailmockup over de volle breedte met de toelichting eronder). De gekozen tab blijft staan bij het bladeren, zodat je tien mails achter elkaar kunt vergelijken.
+- Neutrale basismail als aparte sectie met toon/verberg-knop; deze blijft staan bij filteren.
+- Mailweergave: de eerste regel `Onderwerp: …` uit de JSON wordt de kop, de laatste regel de afzender; de rest wordt letterlijk getoond, inclusief regelafbrekingen en spelfouten (die zijn onderdeel van de casus).
+- Toetsenbordbediening: kaarten, filters en tabs zijn knoppen met zichtbare focus.
 
-### Recent gewijzigd (commit `7655306`)
+### Wijzigingen 18 september 2026
 
-- Uitklappen toont de details nu over de volle paginabreedte (master-detail patroon) — voorheen ingeklemd binnen één kolom.
-- Tegelgrid weer driebreed met responsieve tussenstappen (3 / 2 / 1) — was vast tweebreed.
-- Profiel-tab: voordelen en aandachtspunten in twee kolommen.
-- Mail-casus over de volle breedte met de toelichting eronder, voor betere leesbaarheid.
-- Label "Trainerstoelichting" hernoemd naar "Toelichting".
-- Wijzigingen zijn gepusht naar `main` op GitHub.
+- Pagina opnieuw opgebouwd op `kenmerken.json` als enige inhoudsbron; de oude `index.html` met inline data (juni 2026) is vervangen.
+- Tien casusmails en toelichtingen gegenereerd volgens `PROMPT.md` (16 september 2026) en in de JSON gezet.
+- Neutrale basismail toegevoegd aan de JSON als apart object `basismail` (titel, intro, mail, toelichting).
+- Veld `functies` (typische functies en rollen) per kenmerk teruggezet in de JSON; dat stond in de juni-versie wel in de pagina maar ontbrak in `kenmerken.json`.
+- Donkere variant toegevoegd; navigatie ‹ › in het detailpaneel.
 
 ---
 
@@ -54,30 +55,25 @@ Alles zit in één `index.html`. Er is geen buildstap, geen framework, geen depe
 
 | Beslissing | Reden |
 |---|---|
-| Alles in één HTML-bestand | Geen server nodig, makkelijk te delen en te hosten via GitHub Pages |
-| Driebreed tegelgrid (responsief 3 / 2 / 1) | Compacte overzichtsweergave; de details komen los daaronder, dus de tegels mogen smal blijven |
-| Full-width detailpaneel (master-detail) | Uitklappen toont de details onder de rij over de volle breedte i.p.v. ingeklemd in één smalle kolom |
-| Profiel in twee kolommen, mail over de volle breedte | Benut de extra breedte; de mail blijft over de volle breedte goed leesbaar, de toelichting staat eronder |
-| Neutrale basismail als aparte sectie | Geeft deelnemers een expliciete vergelijkingsbasis vóór de tien varianten |
-| ABT huisstijl | Pagina is bedoeld voor gebruik binnen ABT-context |
-| Geen navigatiebalk | Pagina is een standalone tool, geen onderdeel van de ABT-website |
-| Kaarten zonder afgeronde hoeken | Past bij het strakke, zakelijke ABT-design |
-| Tab-indeling per detail (Profiel / Casus: mail) | Houdt het paneel overzichtelijk; je kiest zelf wat je wil zien |
+| Inhoud in `kenmerken.json`, opmaak in `index.html` | Teksten zijn los van de code te (her)genereren met `PROMPT.md`, zonder risico voor de pagina |
+| Ingesloten kopie van de JSON in `index.html` | Anders is de pagina leeg als je hem lokaal opent; op de website telt alleen de echte JSON |
+| Eén vaste vergadering en vaste verzonnen collega's in alle mails | Zo zie je dat het kenmerk in de vorm zit, niet in de inhoud |
+| Neutrale basismail als apart object en aparte sectie | Expliciete vergelijkingsbasis vóór de tien varianten |
+| Driebreed raster, detailpaneel over de volle breedte | Compact overzicht; details krijgen de ruimte |
+| Geen navigatiebalk, geen afgeronde hoeken | Standalone tool in de strakke ABT-stijl |
+
+---
+
+## Inhoud aanpassen
+
+1. **Mails opnieuw laten schrijven**: plak de prompt uit `PROMPT.md` samen met `kenmerken.json` in Claude; laat alleen `mail` en `toelichting` invullen. Zet het resultaat terug als `kenmerken.json`.
+2. **Losse tekst wijzigen**: pas de tekst in `kenmerken.json` aan. Let op: `\n` is een regelafbreking, aanhalingstekens in de tekst als `\"`. Controleer daarna dat het bestand geldige JSON is (bijvoorbeeld via jsonlint.com).
+3. **Kenmerk toevoegen**: kopieer een object in `kenmerken`, geef het een nieuw `id` en een bestaande `cat`. De pagina pikt het automatisch op; ontbreekt `functies`, dan laat de pagina dat blok gewoon weg.
 
 ---
 
 ## Openstaande taken
 
-- [ ] **ABT-logo toevoegen** — het logo-afbeeldingsbestand is nog niet in de repo opgenomen; het navbar-logo is nu puur CSS-tekst
-- [ ] **Mobiele weergave visueel testen** — de responsive CSS (3 / 2 / 1 kolom) zit erin, maar is nog niet visueel geverifieerd op klein scherm
-- [ ] **Filterwerking controleren** — bij filteren op categorie verdwijnen kaarten correct, maar de basismail-sectie blijft altijd zichtbaar (gewenst gedrag?)
-- [ ] **GitHub Pages controleren** — de code staat op `main`; controleer of Pages aanstaat zodat de pagina live bereikbaar is via een URL
-- [ ] **Eventuele uitbreiding** — extra neurodiverse kenmerken of een tweede casus-type toevoegen is eenvoudig via het `data`-array in het script
-
----
-
-## Wat te doen als volgende stap
-
-1. **Logo toevoegen**: sla het ABT-logo op als `abt-logo.png` in de projectmap en vervang in `index.html` het stuk `<div class="navbar-logo">...</div>` door `<img src="abt-logo.png" alt="ABT" height="40">` — of geef het bestand mee aan Claude Code.
-2. **GitHub Pages aanzetten/controleren**: ga naar [github.com/KobusvanderZwaal/neurodiversiteit](https://github.com/KobusvanderZwaal/neurodiversiteit) → Settings → Pages → Source: `main` / `/ (root)`. De pagina is dan live op `https://kobusvanderzwaal.github.io/neurodiversiteit/`.
-3. **Inhoud aanpassen**: alle teksten, mails en toelichtingen staan in het `data`-array in het `<script>`-blok onderaan `index.html`. Je kunt kenmerken toevoegen, wijzigen of verwijderen zonder iets aan de opmaak te veranderen.
+- [ ] **ABT-logo** — er staat alleen een tekstregel "ABT · Werksessie neurodiversiteit" in de kop; een logobestand is nog niet in de repo opgenomen.
+- [ ] **GitHub Pages controleren** — Settings → Pages → Source `main` / `/ (root)`. De pagina staat dan op `https://kobusvanderzwaal.github.io/neurodiversiteit/`.
+- [ ] **Mobiele weergave op een echt toestel bekijken** — de kolommen schakelen bij 900 en 620 px; dat is in een browservenster getest, niet op een telefoon.
