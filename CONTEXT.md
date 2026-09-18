@@ -2,13 +2,13 @@
 
 ## Doel van het project
 
-Een interactieve referentiepagina voor gebruik bij werksessies over neurodiversiteit bij ABT. De pagina toont tien veelvoorkomende neurodiverse kenmerken op de werkvloer, met per kenmerk:
+Een interactieve referentiepagina voor gebruik bij werksessies over neurodiversiteit bij ABT. De pagina toont negen veelvoorkomende neurodiverse kenmerken op de werkvloer, met per kenmerk:
 
 - Een profiel (passende beroepen, typische functies en rollen, voordelen, aandachtspunten)
 - Een casus: een vergaderverslag-mail geschreven vanuit dat kenmerk
 - Een toelichting voor de trainer: waar let je op, welke kracht, welke valkuil
 
-Bovenaan staat een neutrale basismail — dezelfde vergadering, zonder uitgesproken kenmerk — als vergelijkingsbasis. Alle tien de casusmails vatten hetzelfde ontwerpoverleg samen (project De Werf, verzonnen collega's); alleen de vorm verschilt.
+Bovenaan staat een neutrale basismail — dezelfde vergadering, zonder uitgesproken kenmerk — als vergelijkingsbasis. Alle negen casusmails vatten hetzelfde ontwerpoverleg samen (project De Werf, verzonnen collega's); alleen de vorm verschilt.
 
 De pagina volgt de ABT-huisstijl (blauw #0076C0, warmgrijze achtergrond, Inter) en heeft een donkere variant die de systeeminstelling volgt.
 
@@ -19,7 +19,7 @@ De pagina volgt de ABT-huisstijl (blauw #0076C0, warmgrijze achtergrond, Inter) 
 ```
 neurodiversiteit/
 ├── index.html       # De pagina — HTML, CSS en JavaScript in één bestand; leest kenmerken.json
-├── kenmerken.json   # Alle inhoud: titel, categorieën, basismail en tien kenmerken met mail en toelichting
+├── kenmerken.json   # Alle inhoud: titel, categorieën, basismail en negen kenmerken met mail en toelichting
 ├── PROMPT.md        # De prompt waarmee de casusmails en toelichtingen worden (her)gegenereerd
 └── CONTEXT.md       # Dit bestand
 ```
@@ -34,9 +34,9 @@ neurodiversiteit/
 
 ### Wat werkt
 
-- Tien kenmerk-kaarten in een raster van 3 / 2 / 1 kolommen, met categoriefilter (Alle / Aandacht / Sociaal / Executief / Sensorisch / Leren) en aantallen per categorie.
+- Negen kenmerk-kaarten in een raster van 3 / 2 / 1 kolommen (3×3 op een computer, één kolom op een telefoon), met categoriefilter (Alle / Aandacht / Sociaal / Executief / Sensorisch / Leren) en aantallen per categorie.
 - Aanklikken opent een detailpaneel over de volle breedte direct onder de rij van die kaart (master-detail); Esc of × sluit het. Met ‹ › blader je door de kenmerken zonder terug te hoeven naar het raster — handig tijdens een sessie.
-- Twee tabs per kenmerk: **Profiel** (beroepen, functies en rollen, voordelen en aandachtspunten naast elkaar) en **Casus: mail** (mailmockup over de volle breedte met de toelichting eronder). De gekozen tab blijft staan bij het bladeren, zodat je tien mails achter elkaar kunt vergelijken.
+- Twee tabs per kenmerk: **Profiel** (beroepen, functies en rollen, voordelen en aandachtspunten naast elkaar) en **Casus: mail** (mailmockup over de volle breedte met de toelichting eronder). De gekozen tab blijft staan bij het bladeren, zodat je alle mails achter elkaar kunt vergelijken.
 - Neutrale basismail als aparte sectie met toon/verberg-knop; deze blijft staan bij filteren.
 - Mailweergave: de eerste regel `Onderwerp: …` uit de JSON wordt de kop, de laatste regel de afzender; de rest wordt letterlijk getoond, inclusief regelafbrekingen en spelfouten (die zijn onderdeel van de casus).
 - Toetsenbordbediening: kaarten, filters en tabs zijn knoppen met zichtbare focus.
@@ -48,6 +48,7 @@ neurodiversiteit/
 - Neutrale basismail toegevoegd aan de JSON als apart object `basismail` (titel, intro, mail, toelichting).
 - Veld `functies` (typische functies en rollen) per kenmerk teruggezet in de JSON; dat stond in de juni-versie wel in de pagina maar ontbrak in `kenmerken.json`.
 - Donkere variant toegevoegd; navigatie ‹ › in het detailpaneel.
+- Dyspraxie (DCD) verwijderd op verzoek van Kobus; negen kenmerken over, de oorspronkelijke id's zijn behouden (6 ontbreekt). De aantallen in kop en intro komen nu uit de data.
 
 ---
 
@@ -58,7 +59,7 @@ neurodiversiteit/
 | Inhoud in `kenmerken.json`, opmaak in `index.html` | Teksten zijn los van de code te (her)genereren met `PROMPT.md`, zonder risico voor de pagina |
 | Ingesloten kopie van de JSON in `index.html` | Anders is de pagina leeg als je hem lokaal opent; op de website telt alleen de echte JSON |
 | Eén vaste vergadering en vaste verzonnen collega's in alle mails | Zo zie je dat het kenmerk in de vorm zit, niet in de inhoud |
-| Neutrale basismail als apart object en aparte sectie | Expliciete vergelijkingsbasis vóór de tien varianten |
+| Neutrale basismail als apart object en aparte sectie | Expliciete vergelijkingsbasis vóór de negen varianten |
 | Driebreed raster, detailpaneel over de volle breedte | Compact overzicht; details krijgen de ruimte |
 | Geen navigatiebalk, geen afgeronde hoeken | Standalone tool in de strakke ABT-stijl |
 
